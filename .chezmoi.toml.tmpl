@@ -12,13 +12,13 @@ encryption = "age"
     # pager = "hunky"
     # pager = "diff-so-fancy"
     command = "meld"
-    args = ["--diff"]
+    args = ["--diff", "%destination", "%target"]
 
 [merge]
     command = "avim"
     args = [
         "-d",
-        "{{ .Destination }}",
-        "{{ .Source }}",
-        "{{ .Target }}"
+        "%destination",
+        "%source",
+        "%target"
     ]
