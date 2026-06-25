@@ -1,0 +1,406 @@
+{
+    "panelFamily": "ano",
+    "enabledPanels": [],
+    "familyTransitionAnimation": true,
+
+    "compositor": {
+        "defaultCompositor": "hyprland"
+    },
+
+    "display": {
+        "primaryMonitor": ""
+    },
+
+    "appearance": {
+        "bezel": 0,
+        "extraBackgroundTint": false,
+        "fonts": {
+            "main": "Google Sans Flex",
+            "numbers": "Google Sans Flex",
+            "title": "Google Sans Flex",
+            "expressive": "Google Sans Flex",
+            "iconNerd": "JetBrains Mono NF",
+            "monospace": "JetBrains Mono NF",
+            "reading": "Readex Pro"
+        },
+        "colors": {
+            "materialYou": true,
+            "darkMode": true
+        }
+    },
+
+    "animations": {
+        "enable": true,
+        "speed": 1.0
+    },
+
+    "bars": [{
+        "id": "main",
+        "edge": "top",
+        "modules": {
+            "left": ["sidebarButton", "activeWindow"],
+            "center": ["workspaces"],
+            "right": ["clock", "battery", "network", "bluetooth", "tray", "sidebarButton"]
+        },
+        "autoHide": false,
+        "showBackground": true,
+        "morphingPanel": false,
+        "height": null,
+        "radius": null,
+        "leftSpacing": null,
+        "centerSpacing": null,
+        "rightSpacing": null,
+        "edgePadding": null,
+        "centerGroupPadding": null,
+        "centerGroupRadius": null,
+        "showCenterBackground": null,
+        "showSeparators": null,
+        "leftClickAction": null,
+        "rightClickAction": null,
+        "centerClickAction": null,
+        "scrollLeftAction": null,
+        "scrollRightAction": null,
+        "scrollCenterAction": null
+    }],
+
+    "bar": {
+        "cornerStyle": 0,
+        "morphingPanels": false,
+        "autoHide": { "enable": false },
+        "showBackground": true,
+        "verbose": true,
+        "screenList": [],
+        "workspaces": { "shown": 10 },
+        "layout": {
+            "height": 42,
+            "radius": 12,
+            "leftSpacing": 8,
+            "centerSpacing": 4,
+            "rightSpacing": 8,
+            "edgePadding": 8,
+            "centerGroupPadding": 5,
+            "centerGroupRadius": 8,
+            "showCenterBackground": true,
+            "showSeparators": false
+        },
+        "actions": {
+            "leftClick": "sidebarLeft",
+            "rightClick": "sidebarRight",
+            "centerClick": "overview",
+            "scrollLeft": "brightness",
+            "scrollRight": "volume",
+            "scrollCenter": "workspace"
+        },
+        "weather": {
+            "enable": false,
+            "city": "",
+            "useUSCS": false,
+            "enableGPS": false,
+            "fetchInterval": 15
+        }
+    },
+
+    "sidebar": {
+        "instantOpen": false,
+        "keepLeftSidebarLoaded": true,
+        "keepRightSidebarLoaded": true,
+        "quickSliders": {
+            "showBrightness": true,
+            "showVolume": true,
+            "showMic": false
+        },
+        "right": {
+            "enabledWidgets": [
+                "systemButtons",
+                "quickSliders",
+                "quickToggles",
+                "networkDetail",
+                "media",
+                "notifications",
+                "calendar",
+                "systemInfo"
+            ]
+        }
+    },
+
+    "overview": {
+        "layout": "smartgrid"
+    },
+
+    "audio": {
+        "protection": {
+            "enable": true,
+            "maxAllowedIncrease": 10,
+            "maxAllowed": 100
+        },
+        "spectrum": {
+            "bars": 32,
+            "frameRate": 60
+        }
+    },
+
+    "battery": {
+        "low": 20,
+        "critical": 10,
+        "suspend": 5,
+        "full": 100,
+        "automaticSuspend": false
+    },
+
+    "time": {
+        "format": "hh:mm",
+        "secondPrecision": false,
+        "shortDateFormat": "dd/MM",
+        "dateFormat": "dddd, dd/MM",
+        "dateWithYearFormat": "dd/MM/yyyy"
+    },
+
+    "notifications": {
+        "timeout": 7000,
+        "position": "topRight",
+        "edgeMargin": 8,
+        "expressiveAnimations": true
+    },
+
+    "osd": {
+        "timeout": 1500,
+        "position": "bottom",
+        "indicators": {
+            "volume": true,
+            "brightness": true,
+            "mic": true,
+            "media": true,
+            "keyboard": true,
+            "network": true
+        }
+    },
+
+    "hud": {
+        "enable": true
+    },
+
+    "tray": {
+        "filterPassive": false,
+        "invertPinnedItems": false,
+        "pinnedItems": [],
+        "showItemId": false
+    },
+
+    "media": {
+        "filterDuplicatePlayers": true
+    },
+
+    "background": {
+        "wallpaperPath": "",
+        "thumbnailPath": "",
+        "randomize": {
+            "enable": false,
+            "directory": "~/Pictures/Wallpapers",
+            "interval": 300
+        },
+        "transition": {
+            "enable": true,
+            "type": "crossfade",
+            "duration": 800,
+            "direction": "right"
+        }
+    },
+
+    "light": {
+        "device": ""
+    },
+
+    "sounds": {
+        "battery": true,
+        "theme": "freedesktop"
+    },
+
+    "resources": {
+        "updateInterval": 3000,
+        "historyLength": 60
+    },
+
+    "ai": {
+        "defaultModel": "gemini-2.5-flash",
+        "temperature": 0.5,
+        "systemPrompt": "You are a helpful assistant integrated into a Linux desktop shell called Ano. Be concise and use markdown formatting.",
+        "models": {}
+    },
+
+    "gameMode": {
+        "enable": false,
+        "pollIntervalMs": 2000
+    },
+
+    "powerProfiles": {
+        "restoreOnStart": true,
+        "preferredProfile": ""
+    },
+
+    "network": {
+        "usage": {
+            "enable": false,
+            "intervalMs": 1000,
+            "historyLength": 30
+        },
+        "hotspot": {
+            "ssid": "AnoHotspot",
+            "password": ""
+        }
+    },
+
+    "vpn": {
+        "enable": true,
+        "notifyOnChange": true,
+        "providers": []
+    },
+
+    "nightLight": {
+        "enable": false,
+        "mode": "manual",
+        "dayTemp": 6500,
+        "nightTemp": 4000,
+        "latitude": 0,
+        "longitude": 0
+    },
+
+    "shell": {
+        "preferred": ""
+    },
+
+    "calendar": {
+        "upcomingDays": 7,
+        "externalSync": {
+            "enable": false,
+            "refreshMinutes": 15,
+            "sources": []
+        }
+    },
+
+    "lock": {
+        "enable": true,
+        "notifications": {
+            "enable": false,
+            "maxItems": 5
+        },
+        "osk": {
+            "enable": false
+        },
+        "statusRow": {
+            "enable": false
+        },
+        "dim": {
+            "enable": true,
+            "idleMs": 30000,
+            "opacity": 0.6
+        },
+        "passwordInput": {
+            "expandOnFocus": true
+        }
+    },
+
+    "lyrics": {
+        "enable": false,
+        "visible": true,
+        "backend": "Auto",
+        "dir": "~/.config/anoshell/lyrics"
+    },
+
+    "screenCorners": {
+        "enable": false,
+        "dwellMs": 300,
+        "hitSize": 2,
+        "actions": {
+            "topLeft": "sidebarLeftOpen",
+            "topRight": "sidebarRightOpen",
+            "bottomLeft": "overviewOpen",
+            "bottomRight": "settingsOpen"
+        }
+    },
+
+    "anoSpot": {
+        "enable": false,
+        "position": "top",
+        "widthPx": 420,
+        "heightPx": 36,
+        "showMpris": true,
+        "showNotification": true,
+        "showRecording": true,
+        "showClockWeather": true,
+        "showBattery": true,
+        "showWorkspace": true,
+        "notificationTimeoutMs": 4000,
+        "actions": {
+            "leftClick": "mediaControls",
+            "rightClick": "controlPanel",
+            "middleClick": "anoview",
+            "scrollOnMpris": "audio"
+        },
+        "eventBorder": {
+            "enable": true,
+            "holdMs": 1500,
+            "events": ["notification", "track", "recording", "workspace"]
+        },
+        "draggable": true,
+        "acceptDrops": true,
+        "stashDir": "",
+        "dropTargets": [],
+        "showLyrics": false,
+        "workspaceHoverPreview": {
+            "enable": true,
+            "openDelayMs": 200,
+            "closeDelayMs": 300,
+            "thumbnailWidth": 180,
+            "thumbnailHeight": 110
+        }
+    },
+
+    "interactions": {
+        "scrolling": {
+            "fasterTouchpadScroll": false,
+            "touchpadScrollFactor": 100,
+            "mouseScrollFactor": 50,
+            "mouseScrollDeltaThreshold": 120
+        }
+    },
+
+    "user": {
+        "avatarPath": ""
+    },
+
+    "apps": {
+        "terminal": "kitty",
+        "fileManager": "nemo",
+        "browser": "zen-browser"
+    },
+
+    "focusTime": {
+        "enable": true,
+        "excludeApps": ["Quickshell", "Locked", "Desktop", "Unknown"]
+    },
+
+    "displayManager": {
+        "enable": true
+    },
+
+    "hacks": {
+        "arbitraryRaceConditionDelay": 100
+    },
+
+    "osk": {
+        "layout": ""
+    },
+
+    "dock": {
+        "enable": true,
+        "style": "pill",
+        "position": "bottom",
+        "height": 56,
+        "iconSize": 40,
+        "pinnedOnStartup": false,
+        "hoverToReveal": true,
+        "showOnDesktop": true,
+        "screenList": [],
+        "pinnedApps": ["kitty", "nemo", "zen-browser", "brave-browser"]
+    }
+}

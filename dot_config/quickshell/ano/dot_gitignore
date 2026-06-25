@@ -1,0 +1,19 @@
+# Agent scratchpads / private working notes
+.Claude/
+
+# Compiled QML / JS bytecode
+*.qmlc
+*.jsc
+
+# Editor / OS junk
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local-only backups (e.g. external/.../config.old.kdl-style files
+# kept by users for personal recovery, not part of the shipped config)
+*.bak
+*.old
+*.orig

@@ -1,0 +1,11 @@
+module qs.modules.anoSpot
+AnoSpotActionButton 1.0 AnoSpotActionButton.qml
+AnoSpotBattery 1.0 AnoSpotBattery.qml
+AnoSpotClockWeather 1.0 AnoSpotClockWeather.qml
+AnoSpotMpris 1.0 AnoSpotMpris.qml
+AnoSpotNotification 1.0 AnoSpotNotification.qml
+AnoSpot 1.0 AnoSpot.qml
+AnoSpotRecording 1.0 AnoSpotRecording.qml
+AnoSpotStashPopout 1.0 AnoSpotStashPopout.qml
+AnoSpotWorkspacePreview 1.0 AnoSpotWorkspacePreview.qml
+AnoSpotWorkspace 1.0 AnoSpotWorkspace.qml

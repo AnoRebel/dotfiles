@@ -1,0 +1,141 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/big-pickle",
+  "permission": {
+    "bash": "ask",
+    "edit": "ask"
+  },
+  "plugin": [
+    "opencode-wakatime",
+    "opencode-orchestrator",
+    "@mohak34/opencode-notifier@latest"
+  ],
+  "autoupdate": true,
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "deepseek-coder-v2:latest": {
+          "name": "DeepSeek Coder v2"
+        },
+        "glm-ocr:latest": {
+          "name": "GLM OCR"
+        },
+        "gemma4:latest": {
+          "name": "Gemma 4"
+        },
+        "gemma4:e2b": {
+          "name": "Gemma 4(e2b)"
+        },
+        "qwen3.5:latest": {
+          "name": "Qwen 3.5"
+        },
+        "artifish/llama3.2-uncensored:latest": {
+          "name": "LLama 3.2 Uncensored"
+        },
+        "llama3.1:latest": {
+          "name": "Llama 3.1"
+        },
+        "llama3.2:latest": {
+          "name": "Llama 3.2"
+        },
+        "nomic-embed-text-v2-moe:latest": {
+          "name": "Nomic Embed Text v2 MoE"
+        },
+        "smollm2:135m": {
+          "name": "Smoll M2 135M"
+        },
+        "bge-m3:latest": {
+          "name": "BGE M3"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "enabled": true
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-fetch"],
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "enabled": true,
+      "environment": {
+        "MEMORY_FILE_PATH": "/home/ano/.config/opencode/memory.json"
+      }
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/arben-adm/mcp-sequential-thinking",
+        "--with",
+        "portalocker",
+        "mcp-sequential-thinking"
+      ],
+      "enabled": true
+    },
+    "shadcn-ui-vue": {
+      "type": "local",
+      "command": [
+        "bunx",
+        "-y",
+        "@jpisnice/shadcn-ui-mcp-server",
+        "--framework",
+        "vue"
+      ],
+      "enabled": true
+    },
+    "shadcn-ui-react": {
+      "type": "local",
+      "command": [
+        "bunx",
+        "-y",
+        "@jpisnice/shadcn-ui-mcp-server"
+      ],
+      "enabled": true
+    },
+    "nuxt": {
+      "type": "remote",
+      "url": "https://nuxt.com/mcp",
+      "enabled": true
+    },
+    "nuxt-ui": {
+      "type": "remote",
+      "url": "https://ui.nuxt.com/mcp",
+      "enabled": true
+    },
+    "dokploy-mcp": {
+      "type": "local",
+      "command": ["bunx", "-y", "@dokploy/mcp"],
+      "environment": {
+        "DOKPLOY_URL": "https://dokploy.anorebel.net/api",
+        "DOKPLOY_API_KEY": ""
+      },
+      "enabled": true
+    },
+    "github": {
+      "type":"remote",
+      "url":"https://api.githubcopilot.com/mcp",
+      "headers":{
+        "Authorization":"Bearer ghp_1234567890"
+      }
+    },
+    "serena": {
+      "type": "local",
+      "command": ["uvx", "--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "enabled": true
+    }
+  }
+}

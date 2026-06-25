@@ -1,0 +1,768 @@
+// =============================================================================
+// Ano QuickShell — Niri companion configuration
+//
+// Usage: Copy or symlink this to ~/.config/niri/config.kdl
+//   cp ~/.config/niri/ano.kdl ~/.config/niri/config.kdl
+//   — or —
+//   ln -sf ~/.config/niri/ano.kdl ~/.config/niri/config.kdl
+//
+// This config replaces waybar/swaync/swayosd with Ano QuickShell.
+// All UI interactions (sidebars, overview, settings, OSD, notifications)
+// go through QuickShell IPC: qs -c ano ipc call <target> <method>
+// =============================================================================
+
+// ─── Input ───────────────────────────────────────────────────────────────────
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {
+    }
+
+    workspace-auto-back-and-forth
+}
+
+// ─── Outputs ─────────────────────────────────────────────────────────────────
+
+/-output "eDP-1" {
+}
+
+/-output "HDMI-A-1" {
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+layout {
+    gaps 5
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 2
+        active-color "#cdd6f4"
+        inactive-color "#595959aa"
+    }
+
+    border {
+        off
+    }
+
+    shadow {
+        on
+        softness 8
+        spread 2
+        offset x=0 y=2
+        color "#1a1a1aee"
+    }
+
+    tab-indicator {
+        hide-when-single-tab
+        active-color "#cdd6f4"
+        inactive-color "#595959"
+    }
+}
+
+// ─── Animations ──────────────────────────────────────────────────────────────
+
+animations {
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 120
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+    }
+
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+}
+
+// ─── Overview ────────────────────────────────────────────────────────────────
+
+overview {
+    zoom 0.5
+    backdrop-color "#111111"
+}
+
+// ─── Gestures ────────────────────────────────────────────────────────────────
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+// ─── Miscellaneous ───────────────────────────────────────────────────────────
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// ─── Environment Variables ───────────────────────────────────────────────────
+
+environment {
+    GDK_BACKEND "wayland,x11"
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+    SDL_VIDEODRIVER "wayland,x11,windows"
+    CLUTTER_BACKEND "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    XCURSOR_SIZE "16"
+    XCURSOR_THEME "Qogir"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+    XDG_SESSION_DESKTOP "niri"
+    _JAVA_AWT_WM_NONREPARENTING "1"
+}
+
+// ─── Cursor ──────────────────────────────────────────────────────────────────
+
+cursor {
+    xcursor-theme "Qogir"
+    xcursor-size 16
+    hide-when-typing
+}
+
+// ─── Startup Programs ────────────────────────────────────────────────────────
+
+// Ano QuickShell — main shell (replaces waybar + swaync + swayosd)
+// Guard: kill any lingering legacy bars/notifiers before spawning the shell.
+spawn-sh-at-startup "pkill -x waybar; pkill -x swaync; pkill -x swayosd; true"
+spawn-sh-at-startup "qs -c ano &"
+
+// XWayland support for Niri — runs as a background daemon, no visible window.
+// Required for X11 apps (Discord, Steam, older Electron) to work under Niri.
+spawn-sh-at-startup "xwayland-satellite &"
+
+// D-Bus / XDG integration
+spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"
+spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
+// Authentication agent
+spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+
+// System tray applet
+spawn-at-startup "nm-applet" "--indicator"
+
+// Clipboard history (with QS IPC update)
+spawn-sh-at-startup "wl-paste --type text --watch bash -c 'cliphist store && qs -c ano ipc call cliphistService update'"
+spawn-sh-at-startup "wl-paste --type image --watch bash -c 'cliphist store && qs -c ano ipc call cliphistService update'"
+
+// Wallpaper — awww with randomize (also triggers matugen via switchwall.sh)
+spawn-sh-at-startup "~/.config/awww/scripts/awww_randomize_multi.sh ~/Pictures/hyprwallpapers"
+
+// Additional services
+spawn-at-startup "kdeconnectd"
+spawn-at-startup "bauh-tray"
+
+// ─── Key Bindings ────────────────────────────────────────────────────────────
+
+binds {
+    // ══════════════════════════════════════════════════════════════════════
+    // ANO QUICKSHELL UI (via IPC)
+    // All shell panels are controlled through: qs -c ano ipc call <target> <method>
+    // ══════════════════════════════════════════════════════════════════════
+
+    // Overview (window expose with 10 layout algorithms)
+    Mod+Tab { spawn-sh "qs -c ano ipc call anoview toggle"; }
+
+    // Task view (current workspace windows only)
+    Mod+Grave { spawn-sh "qs -c ano ipc call taskView toggle"; }
+
+    // Sidebars (left = AI Chat + Notifications + Translator, right = controls + media + calendar)
+    Mod+B { spawn-sh "qs -c ano ipc call sidebarLeft toggle"; }
+    Mod+N { spawn-sh "qs -c ano ipc call sidebarRight toggle"; }
+
+    // App launcher (built-in search with DesktopEntries + calculator)
+    Mod+A { spawn-sh "qs -c ano ipc call search toggle"; }
+
+    // Control panel (floating notification-shade with toggles + sliders)
+    Mod+I { spawn-sh "qs -c ano ipc call controlPanel toggle"; }
+
+    // Settings overlay
+    Mod+Comma { spawn-sh "qs -c ano ipc call settings toggle"; }
+
+    // HUD (system dashboard: clock, CPU/RAM, network, media, spectrum)
+    Mod+Shift+I { spawn-sh "qs -c ano ipc call hud toggle"; }
+
+    // Clipboard history (QS built-in with search, or rofi fallback)
+    Alt+V { spawn-sh "qs -c ano ipc call clipboard toggle"; }
+
+    // Cheatsheet (searchable keybinds)
+    Mod+Slash { spawn-sh "qs -c ano ipc call cheatsheet toggle"; }
+
+    // Media controls overlay (full player with vinyl art + spectrum)
+    Mod+O { spawn-sh "qs -c ano ipc call mediaControls toggle"; }
+
+    // Session menu (hold-to-confirm: lock/logout/sleep/reboot/shutdown)
+    Mod+X { spawn-sh "qs -c ano ipc call session toggle"; }
+
+    // Toggle bar visibility
+    Mod+Shift+B { spawn-sh "qs -c ano ipc call bar toggle"; }
+
+    // Wallpaper selector (grid browser with directory navigation)
+    Ctrl+Mod+T { spawn-sh "qs -c ano ipc call wallpaperSelector toggle"; }
+
+    // Weather panel (detailed weather overlay)
+    Mod+Shift+W { spawn-sh "qs -c ano ipc call weatherPanel toggle"; }
+
+    // Toggle dock pin
+    Mod+Shift+D { spawn-sh "qs -c ano ipc call dock toggle"; }
+
+    // FocusTime (app usage tracker)
+    Mod+Shift+F { spawn-sh "qs -c ano ipc call focusTime toggle"; }
+
+    // Display manager (Hyprland-only, no-op on Niri)
+    // Ctrl+Mod+D { spawn-sh "qs -c ano ipc call displayManager toggle"; }
+
+    // Lock screen (QS built-in PAM lock for Niri)
+    Mod+L { spawn-sh "qs -c ano ipc call lock lock"; }
+
+    // Cycle panel family
+    Ctrl+Mod+P { spawn-sh "qs -c ano ipc call panelFamily cycle"; }
+
+    // Restart QuickShell
+    Ctrl+Mod+R { spawn-sh "killall qs quickshell; sleep 0.3; qs -c ano &"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // TERMINAL & APPS
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+Return { spawn "kitty"; }
+    Ctrl+Alt+T { spawn "ghostty"; }
+
+    // Window management
+    Mod+Shift+Q { close-window; }
+    Mod+Ctrl+Q { quit; }
+    Mod+F { maximize-column; }
+    // Mod+Shift+F is reserved for `qs -c ano ipc call focusTime toggle` at line ~256.
+    // Use Mod+Alt+F for true fullscreen since the column-aware Mod+F is the daily-driver.
+    Mod+Alt+F { fullscreen-window; }
+    Mod+Space { toggle-window-floating; }
+
+    // Applications
+    Mod+E { spawn "nemo" "/home/ano/Downloads"; }
+    Ctrl+Alt+B { spawn "neovide" "--neovim-bin" "avim"; }
+    Mod+Z { spawn "zen-browser"; }
+
+    // Vicinae launcher
+    Mod+D { spawn "vicinae" "toggle"; }
+
+    // Rofi (fallback launcher)
+    Mod+R { spawn-sh "~/.config/rofi/scripts/launcher.sh"; }
+
+    // Emoji picker
+    Mod+Period { spawn-sh "wofi-emoji"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // SCREENSHOTS
+    // ══════════════════════════════════════════════════════════════════════
+
+    Print { screenshot; }
+    Shift+Print { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
+    Mod+Shift+S { spawn-sh "grim -g \"$(slurp)\" - | wl-copy"; }
+
+    // Color picker
+    Mod+Shift+C { spawn-sh "hyprpicker -a && notify-send 'Color picked' \"$(wl-paste)\""; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // LOCK / SESSION (fallbacks)
+    // ══════════════════════════════════════════════════════════════════════
+
+    // Mod+L already mapped to QS lock above
+    Mod+Shift+L { spawn-sh "systemctl suspend || loginctl suspend"; }
+    Ctrl+Alt+K { spawn-sh "qs -c ano ipc call lock lock"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // SYSTEM MONITOR / CONFIG
+    // ══════════════════════════════════════════════════════════════════════
+
+    Ctrl+Shift+Escape { spawn "kitty" "-e" "btop"; }
+    Ctrl+Alt+U { spawn "pavucontrol"; }
+    Mod+Shift+O { spawn "kitty" "-e" "avim" "/home/ano/.config/niri/ano.kdl"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // FOCUS NAVIGATION
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-or-workspace-up; }
+    Mod+Down  { focus-window-or-workspace-down; }
+
+    Mod+H { focus-column-left; }
+    Mod+Semicolon { focus-column-right; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+J { focus-window-or-workspace-down; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // MOVE WINDOWS
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+Semicolon { move-column-right; }
+    Mod+Shift+K { move-window-up-or-to-workspace-up; }
+    Mod+Shift+J { move-window-down-or-to-workspace-down; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // RESIZE WINDOWS
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+Ctrl+Left  { set-column-width "-5%"; }
+    Mod+Ctrl+Right { set-column-width "+5%"; }
+    Mod+Ctrl+Up    { set-window-height "-5%"; }
+    Mod+Ctrl+Down  { set-window-height "+5%"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // COLUMN MANAGEMENT
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+Shift+R { switch-preset-column-width; }
+    // Mod+Ctrl+R conflicts with shell-restart at line ~268. Use Mod+Alt+R for column-height cycling.
+    Mod+Alt+R   { switch-preset-window-height; }
+
+    Mod+C { center-column; }
+    Mod+W { toggle-column-tabbed-display; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // WORKSPACES
+    // ══════════════════════════════════════════════════════════════════════
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
+
+    Alt+Tab       { focus-workspace-down; }
+    Alt+Shift+Tab { focus-workspace-up; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+    Mod+WheelScrollRight                { focus-column-right; }
+    Mod+WheelScrollLeft                 { focus-column-left; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // VOLUME & BRIGHTNESS (routed through QS services → triggers OSD)
+    // ══════════════════════════════════════════════════════════════════════
+
+    // Volume — use QS Audio service (triggers OSD automatically)
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c ano ipc call audio increment || wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ -l 1.5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c ano ipc call audio decrement || wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "qs -c ano ipc call audio toggleMute || wpctl set-mute @DEFAULT_SINK@ toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "qs -c ano ipc call audio toggleMicMute || wpctl set-mute @DEFAULT_SOURCE@ toggle"; }
+
+    // Brightness — use QS Brightness service (triggers OSD automatically)
+    XF86MonBrightnessUp   { spawn-sh "qs -c ano ipc call brightness increment || brightnessctl s 5%+"; }
+    XF86MonBrightnessDown { spawn-sh "qs -c ano ipc call brightness decrement || brightnessctl s 5%-"; }
+
+    // Keyboard backlight
+    XF86KbdBrightnessUp   { spawn-sh "brightnessctl -d '*::kbd_backlight' s 10%+"; }
+    XF86KbdBrightnessDown { spawn-sh "brightnessctl -d '*::kbd_backlight' s 10%-"; }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // MEDIA CONTROLS (routed through QS MPRIS service)
+    // ══════════════════════════════════════════════════════════════════════
+
+    XF86AudioPlay allow-when-locked=true { spawn-sh "qs -c ano ipc call mpris playPause || playerctl play-pause"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "qs -c ano ipc call mpris next || playerctl next"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "qs -c ano ipc call mpris previous || playerctl previous"; }
+    XF86AudioStop allow-when-locked=true { spawn-sh "qs -c ano ipc call mpris pauseAll || playerctl stop"; }
+
+    Mod+Shift+P { spawn-sh "qs -c ano ipc call mpris playPause || playerctl play-pause"; }
+    Mod+Shift+N { spawn-sh "qs -c ano ipc call mpris next || playerctl next"; }
+
+    // WiFi restart
+    XF86WLAN { spawn "systemctl" "restart" "NetworkManager"; }
+}
+
+// ─── Window Rules ────────────────────────────────────────────────────────────
+
+// Global: rounded corners + niri 26.04 backdrop blur (parity with Hyprland-Ano's
+// decoration.blur { enabled = true; xray = true }). Blur is applied at the global
+// level — Niri only renders backdrop where there's actual transparency, so opaque
+// apps cost nothing. Per-app opacity rules (kitty/code/browsers/steam below)
+// supply the transparency that triggers the blur.
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+    background-effect {
+        blur true
+        xray true
+    }
+
+    // Popups (menus, tooltips, dropdowns) — slightly tighter rounding
+    // and consistent translucent-blurred styling.
+    popups {
+        geometry-corner-radius 8
+        opacity 0.95
+        background-effect {
+            blur true
+            xray true
+        }
+    }
+}
+
+// Kitty
+window-rule {
+    match app-id="kitty"
+    opacity 0.8
+}
+
+// Code editors
+window-rule {
+    match app-id=r#"(?i)code"#
+    match app-id="VSCodium"
+    opacity 0.8
+}
+
+// Browsers
+window-rule {
+    match app-id=r#"(?i)firefox"#
+    match app-id=r#"(?i)zen"#
+    match app-id=r#"(?i)brave"#
+    match app-id="Google-chrome"
+    opacity 0.9
+}
+
+// Steam
+window-rule {
+    match app-id=r#"(?i)steam"#
+    opacity 0.7
+}
+
+// GTK/Qt system apps
+window-rule {
+    match app-id="nwg-look"
+    match app-id="qt5ct"
+    match app-id="qt6ct"
+    opacity 0.8
+}
+
+// Polkit / portals
+window-rule {
+    match app-id=r#"polkit"#
+    match app-id=r#"org\.freedesktop\.impl\.portal"#
+    opacity 0.8
+}
+
+// Network manager
+window-rule {
+    match app-id="nm-connection-editor"
+    match app-id="nm-applet"
+    match app-id="blueman-manager"
+    opacity 0.8
+    open-floating true
+}
+
+// Pavucontrol
+window-rule {
+    match app-id=r#"pavucontrol"#
+    open-floating true
+    opacity 0.8
+    default-column-width { proportion 0.4; }
+    default-window-height { proportion 0.9; }
+}
+
+// Float rules
+window-rule {
+    match app-id=r#"(?i)thunar"#
+    open-floating true
+    opacity 0.8
+}
+
+window-rule {
+    match title="^btop$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="io.missioncenter.MissionCenter"
+    open-floating true
+    opacity 0.8
+}
+
+window-rule {
+    match app-id="stacer"
+    open-floating true
+}
+
+window-rule {
+    match app-id="vlc"
+    open-floating true
+    default-column-width { fixed 640; }
+    default-window-height { fixed 400; }
+}
+
+// Picture-in-Picture
+window-rule {
+    match title=r#"Picture(-| )in(-| )[Pp]icture"#
+    open-floating true
+}
+
+// File dialogs
+window-rule {
+    match title=r#"(?i)(select|open)( a)? (file|folder)"#
+    match title=r#"(?i)file (operation|upload)"#
+    match title=r#"\.* Properties$"#
+    match title="^Save As$"
+    match title="^Open$"
+    match title="^Choose Files$"
+    match title="^Confirm to replace files$"
+    match title="^File Operation Progress$"
+    open-floating true
+}
+
+// XDG portal
+window-rule {
+    match app-id="xdg-desktop-portal-gtk"
+    match app-id="Xdg-desktop-portal-gtk"
+    open-floating true
+}
+
+// GNOME Settings
+window-rule {
+    match app-id=r#"org\.gnome\.Settings"#
+    open-floating true
+    default-column-width { proportion 0.7; }
+    default-window-height { proportion 0.8; }
+}
+
+// nmtui in kitty
+window-rule {
+    match app-id="kitty" title="nmtui"
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.7; }
+}
+
+// nwg-look
+window-rule {
+    match app-id="nwg-look"
+    open-floating true
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.6; }
+}
+
+// Rofi
+window-rule {
+    match app-id=r#"(?i)rofi"#
+    open-floating true
+}
+
+// Bauh
+window-rule {
+    match app-id="python3" title=r#"^(bauh|Authentication|Upgrade|Backup|System restart)"#
+    open-floating true
+}
+
+// Steam notification toasts — pin to bottom-right (port from inir e1604d84)
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+// XWayland Video Bridge — KDE helper autostarted via /etc/xdg/autostart/.
+// Hardened to never flash a visible window on login (matches Hyprland's
+// `max_size 1 1, no_initial_focus on, no_blur on, no_anim on` rule).
+window-rule {
+    match app-id="xwaylandvideobridge"
+    opacity 0.0
+    open-focused false
+    open-floating true
+    min-width 1
+    max-width 1
+    min-height 1
+    max-height 1
+    block-out-from "screen-capture"
+}
+
+// Sharing indicators
+window-rule {
+    match title=r#"Sharing Indicator$"#
+    match title=r#"is sharing (your screen|a window)\."#
+    open-focused false
+    block-out-from "screencast"
+}
+
+// ─── Layer Rules ─────────────────────────────────────────────────────────────
+
+// QuickShell surfaces — all ano namespaces.
+// niri 26.04: backdrop blur on QuickShell surfaces. Blur only renders where
+// transparency exists, so opaque overlay rules below are no-ops for the blur
+// pass.
+//
+// Future refactor: niri 26.04 also added `match layer="top|overlay|bottom|background"`
+// matchers — could narrow these rules by layer-shell layer name instead of (or
+// in addition to) the namespace pattern when surfaces grow more diverse.
+layer-rule {
+    match namespace=r#"^quickshell:"#
+    opacity 0.95
+    background-effect {
+        blur true
+        xray true
+    }
+    shadow {
+        on
+        softness 15
+        spread 3
+        offset x=0 y=3
+        color "#00000050"
+    }
+}
+
+// QuickShell bar specifically — tighter shadow
+layer-rule {
+    match namespace="quickshell:bar"
+    opacity 0.95
+    background-effect {
+        blur true
+        xray true
+    }
+    shadow {
+        on
+        softness 10
+        spread 2
+        offset x=0 y=2
+        color "#0000004a"
+    }
+}
+
+// QuickShell overlays (overview, settings, session) — full opacity.
+// background-effect is a no-op at opacity 1.0 (no transparency to blur)
+// but kept for consistency with the other QS rules so any future
+// per-overlay opacity tuning gets blur for free.
+layer-rule {
+    match namespace="quickshell:anoview"
+    match namespace="quickshell:settings"
+    match namespace="quickshell:session"
+    match namespace="quickshell:lock"
+    match namespace="quickshell:search"
+    match namespace="quickshell:altSwitcher"
+    opacity 1.0
+    background-effect {
+        blur true
+        xray true
+    }
+}
+
+// Rofi launcher
+layer-rule {
+    match namespace="rofi"
+    opacity 0.95
+    background-effect {
+        blur true
+        xray true
+    }
+    shadow {
+        on
+        softness 20
+        spread 5
+        offset x=0 y=5
+        color "#00000064"
+    }
+    geometry-corner-radius 12
+}
+
+// Notifications (swaync as fallback — Ano handles notifs natively)
+layer-rule {
+    match namespace="notifications"
+    match namespace="swaync-notification-window"
+    match namespace="swaync-control-center"
+    opacity 0.95
+    background-effect {
+        blur true
+        xray true
+    }
+    shadow {
+        on
+        softness 15
+        spread 3
+        offset x=0 y=3
+        color "#00000050"
+    }
+}
+
+// Wallpaper — rendered behind windows via place-within-backdrop, so blur
+// here is a no-op in normal use; included for completeness.
+layer-rule {
+    match namespace="wallpaper"
+    place-within-backdrop true
+    background-effect {
+        blur true
+        xray true
+    }
+}

@@ -1,0 +1,133 @@
+theme:
+  background-color: 225 14 15
+  primary-color: 157 47 65
+  contrast-multiplier: 1.1
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: clock
+          
+          - type: reddit
+            subreddit: selfhosted
+
+          - type: reddit
+            subreddit: neovim
+              
+            columns:
+             - size: full
+      
+      - size: full
+        widgets:
+          - type: rss
+            title: Self-Hosted News
+            limit: 10
+            style: detailed-list
+            collapse-after: 3
+            cache: 1h
+            feeds:
+              - url: https://noted.lol/rss
+                title: Noted
+              - url: https://tim.kicker.dev/rss
+                title: Tim Kicker
+              - url: https://www.smarthomebeginner.com/feed
+                title: Smart Home Beginner
+              - url: https://nerdyarticles.com/rss
+                title: AHenning
+              - url: https://technotim.live/feed.xml
+                title: Techno Tim
+              - url: https://blog.lrvt.de/tag/selfhosting/rss
+                title: LRVT                
+
+          - type: rss
+            title: Self-Hosted Podcasts
+            limit: 4
+            style: detailed-list
+            collapse-after: 3
+            cache: 1h
+            feeds:
+              - url: https://selfh.st/cast/rss
+                title: Selfh.st
+              - url: https://feeds.fireside.fm/selfhosted/rss
+                title: Self-Hosted Podcast
+              - url: https://hasspodcast.io/feed
+                title: Home Assistant Podcast               
+              - url: https://thehomelab.show/feed/podcast
+                title: The Homelabe Show
+                
+            columns:
+             - size: full
+
+      - size: full
+        widgets:
+          - type: videos
+            size: full
+            style: grid-cards
+            limit: 15
+            title: Self-Hosting and Homelab Youtube Channels
+            channels:
+              - UCwFpzG5MK5Shg_ncAhrgr9g # Awesome Open-Source
+              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+              - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
+              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
+              - UCXJ4jKAvMMg56WGhqrZHFgw # Techdox
+              - UCVy16RS5eEDh8anP8j94G2A # DBTech
+              - UCUUTdohVElFLSP4NBnlPEwA # Jims Garage
+              - UC4iWyxtq_qq79Fo7crc34KQ # Easy Self Host
+              - UCjSEJkpGbcZhvo0lr-44X_w # TechHut
+              
+
+  - name: Tech News
+    columns:
+      - size: small
+        widgets:
+          - type: calendar
+          
+          - type: releases
+            repositories:
+              - immich-app/immich
+              - go-gitea/gitea
+              - dani-garcia/vaultwarden
+              - jellyfin/jellyfin
+
+          - type: reddit
+            subreddit: technology
+              
+            columns:
+             - size: full
+      
+      - size: full
+        widgets:
+          - type: hacker-news
+            limit: 10
+            collapse-after: 5
+            style: vertical-list
+
+          - type: rss
+            title: General Tech
+            limit: 10
+            style: detailed-list
+            collapse-after: 5
+            cache: 1h
+            feeds:
+              - url: https://news.itsfoss.com/latest/rss
+                title: It's FOSS
+              - url: https://arstechnica.com/feed
+                title: Ars Technica
+                
+            columns:
+             - size: full
+
+      - size: full
+        widgets:
+          - type: rss
+            size: full
+            style: vertical-list
+            limit: 20
+            collapse-after: 20
+            title: Security
+            cache: 1h
+            feeds:
+              - url: https://www.bleepingcomputer.com/feed/
+                title: Bleeping Computer

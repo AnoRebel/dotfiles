@@ -1,0 +1,102 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "providers": {
+    "ollama": {
+      "name": "Ollama",
+      "base_url": "http://192.168.0.10:11434/v1/",
+      "type": "openai",
+      "models": [
+        {
+          "name": "Qwen 3.5",
+          "id": "qwen3.5:latest",
+          "context_window": 256000,
+          "default_max_tokens": 20000
+        },
+        {
+          "id": "smollm2:135m",
+          "name": "Smollm2 135M"
+        },
+        {
+          "id": "bge-m3:latest",
+          "name": "BGE M3"
+        },
+        {
+          "id": "deepseek-coder-v2:latest",
+          "name": "DeepSeek Coder v2"
+        },
+        {
+          "id": "artifish/llama3.2-uncensored:latest",
+          "name": "Artifish Llama3.2 Uncensored"
+        },
+        {
+          "id": "gemma4:latest",
+          "name": "Gemma 4"
+        },
+        {
+          "id": "llama3.1:latest",
+          "name": "Llama 3.1"
+        }
+      ]
+    }
+  },
+  "lsp": {},
+  "mcp": {
+    "fetch": {
+      "type": "stdio",
+      "args": ["mcp-server-fetch"],
+      "command": "uvx"
+    },
+    "memory": {
+      "type": "stdio",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "command": "npx",
+      "env": {
+        "MEMORY_FILE_PATH": "memory.json"
+      }
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "args": ["--from", "git+https://github.com/arben-adm/mcp-sequential-thinking", "--with", "portalocker", "mcp-sequential-thinking"],
+      "command": "uvx"
+    },
+    "serena": {
+      "type": "stdio",
+      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "command": "uvx",
+      "disabled": true
+    },
+    "dokploy-mcp": {
+      "type": "stdio",
+      "command": "bunx",
+      "args": ["-y", "@ahdev/dokploy-mcp"],
+      "env": {
+        "DOKPLOY_URL": "https://your-dokploy-server.com/api",
+        "DOKPLOY_API_KEY": "your-dokploy-api-token"
+      },
+      "disabled": true
+    },
+    "shadcn-vue": {
+      "type": "stdio",
+      "command": "bunx",
+      "args": ["-y", "@jpisnice/shadcn-ui-mcp-server", "--framework", "vue"],
+      "env": {
+        "FRAMEWORK": "vue",
+        "NODE_ENV": "production"
+      }
+    },
+    "shadcn-react": {
+      "type": "stdio",
+      "command": "bunx",
+      "args": ["-y", "@jpisnice/shadcn-ui-mcp-server", "--framework", "react"],
+      "env": {
+        "FRAMEWORK": "react",
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

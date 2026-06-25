@@ -1,0 +1,24 @@
+npm update -g @vue/typescript-plugin
+podman run -d -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Nephilim.4' --name sql_server_16 --hostname rebel -p 1433:1433 -v /var/opt/mssql_16:/var/opt/mssql:Z mcr.microsoft.com/mssql/server:2022-latest
+sudo chmod 777 -R /var/opt/mssql_16
+export QT_QPA_PLATFORM=wayland ./Applications/Stacer-1.1.0-x64_be32d491aee969110de75e26b12e4bc7.AppImage
+ps -eo pcpu,args | tail -n +2 | sort -k1 -r -n | head -10
+pipx upgrade poetry
+podman run -d -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Nephilim.4' --name sql_server_16 --hostname rebel -p 1433:1433 -v /var/opt/mssql_16:/var/opt/mssql:Z mcr.microsoft.com/mssql/server:2022-latest
+paru -S xclip xsel zellij
+rm /var/lib/pacman/db.lck
+git clone https://github.com/actionMedeorTZ/AMARYLIS_FRONTEND_V2.git frontend
+sudo tar xf net.downloadhelper.coapp-1.6.3-1_amd64.tar.gz -C /usr/local
+sudo /usr/local/net.downloadhelper.coapp-1.6.3/bin/net.downloadhelper.coapp-linux-64 install --system
+tgpt --provider opengpts "In git, how do you merge branch 'b' into branch 'c' without affecting 'b' and without deleting 'b' or 'c'"
+pipx upgrade-all
+ls
+./Applications/Stacer-1.1.0-x64_be32d491aee969110de75e26b12e4bc7.AppImage
+poetry completions zsh >> ~/.zfunc/_poetry
+go-blueprint completion bash > ~/.local/share/bash-completion/completions/go-blueprint
+hyprpm hyprexpo
+export KERL_CONFIGURE_OPTIONS="--with-odbc=/var/lib/pacman/local/unixodbc-$(pacman -Q unixodbc | cut -d' ' -f2)"
+bat .local/state/tempvim/lsp.log
+podman build -t "labcore:latest" -f LaboratoryCore/Dockerfile .
+paru -S neovide
+convert public/bubbles.jpg -resize 1920x1080 public/bubbles.webp

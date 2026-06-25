@@ -1,0 +1,6 @@
+neovim-bin = "avim"
+
+[font]
+normal = ["FiraCode Nerd Font"]
+size = 13
+fork = false

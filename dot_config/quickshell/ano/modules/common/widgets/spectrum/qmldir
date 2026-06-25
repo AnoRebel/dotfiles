@@ -1,0 +1,3 @@
+module qs.modules.common.widgets.spectrum
+LinearSpectrum 1.0 LinearSpectrum.qml
+MirroredSpectrum 1.0 MirroredSpectrum.qml

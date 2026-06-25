@@ -1,0 +1,5 @@
+module qs.modules.lock
+LockNotifications 1.0 LockNotifications.qml
+LockOSK 1.0 LockOSK.qml
+LockScreen 1.0 LockScreen.qml
+LockStatusRow 1.0 LockStatusRow.qml

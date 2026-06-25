@@ -1,0 +1,9 @@
+module qs.modules.sidebarRight
+CompactMediaPlayer 1.0 CompactMediaPlayer.qml
+NetworkDetailPanel 1.0 NetworkDetailPanel.qml
+NotificationCenter 1.0 NotificationCenter.qml
+QuickSliders 1.0 QuickSliders.qml
+QuickToggles 1.0 QuickToggles.qml
+SidebarRightContent 1.0 SidebarRightContent.qml
+SidebarRight 1.0 SidebarRight.qml
+SystemInfoPanel 1.0 SystemInfoPanel.qml

@@ -1,0 +1,50 @@
+[pyprland]
+plugins = [
+"scratchpads",
+"expose",
+"layout_center",
+"lost_windows",
+"workspaces_follow_focus",
+"toggle_special",
+# "shift_monitors",
+# "monitors",
+# "toggle_dpms",
+]
+
+[worskpaces_follow_focus]
+max_workspaces = 7
+
+[expose]
+include_special = false
+
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm nu"
+class = "kitty-dropterm"
+lazy = true
+multi = false
+size = "75% 60%"
+
+[scratchpads.volume]
+animation = "fromRight"
+command = "pavucontrol"
+class = "org.pulseaudio.pavucontrol"
+lazy = true
+multi = false
+size = "40% 90%"
+# unfocus = "hide"
+
+[layout_center]
+margin = 60
+offset = [0, 30]
+next = "movefocus r"
+prev = "movefocus l"
+next2 = "movefocus d"
+prev2 = "movefocus u"
+
+[monitors]
+unknown = "wlrlui"
+
+# [monitors.placement]
+# "HP".leftOf = "eDP-1"
+# "Chimei".rightOf = "HDMI-A-1"

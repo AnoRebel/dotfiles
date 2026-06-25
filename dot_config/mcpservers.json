@@ -1,0 +1,88 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "sequential-thinking": {
+      "command": "uvx",
+      "args":[ "--from",
+        "git+https://github.com/arben-adm/mcp-sequential-thinking",
+        "--with",
+        "portalocker",
+        "mcp-sequential-thinking"]
+    },
+    "serena": {
+      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "command": "uvx"
+    },
+    "memory": {
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "command": "npx",
+      "env": {
+        "MEMORY_FILE_PATH": "memory.json"
+      }
+    },
+    "dokploy-mcp": {
+      "command": "bunx",
+      "args": ["-y", "@dokploy/mcp"],
+      "env": {
+        "DOKPLOY_URL": "https://your-dokploy-server.com/api",
+        "DOKPLOY_API_KEY": "your-dokploy-api-token"
+      },
+      "disabled": true
+    },
+    "fetch": {
+      "args": ["mcp-server-fetch"],
+      "command": "uvx"
+    },
+    "tweakcn": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn@canary",
+        "registry:mcp"
+      ],
+      "env": {
+        "REGISTRY_URL": "https://tweakcn.com/r/themes/registry.json"
+      }
+    },
+    "shadcn-ui-vue": {
+      "command": "bunx",
+      "args": [
+        "-y",
+        "@jpisnice/shadcn-ui-mcp-server",
+        "--framework",
+        "vue"
+      ],
+      "disabled": false
+    },
+    "shadcn-ui-react": {
+      "type": "local",
+      "command": [
+        "bunx",
+        "-y",
+        "@jpisnice/shadcn-ui-mcp-server"
+      ],
+      "enabled": true
+    },
+    "nuxt": {
+      "type": "remote",
+      "url": "https://nuxt.com/mcp",
+      "enabled": true
+    },
+    "nuxt-ui": {
+      "type": "remote",
+      "url": "https://ui.nuxt.com/mcp",
+      "enabled": true
+    },
+    "github": {
+      "type":"remote",
+      "url":"https://api.githubcopilot.com/mcp",
+      "headers":{
+        "Authorization":"Bearer ghp_1234567890"
+      }
+    }
+  },
+  "nativeMCPServers": []
+}

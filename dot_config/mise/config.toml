@@ -1,0 +1,14 @@
+[tool_alias.node.versions]
+lts = "24"
+prev = "22"
+
+[tools]
+erlang = "29"
+elixir = "1.20.0-otp-29"
+node = { version = "lts", postinstall = "corepack enable" }
+go = "latest"
+golangci-lint = "v2.11.4"
+air = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]

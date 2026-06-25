@@ -1,0 +1,37 @@
+git:
+  useConfig: true
+  pagers:
+    - colorArg: always
+      pager: diff-so-fancy
+os:
+  edit: "avim {{filename}}"
+  editAtLine: "avim +{{line}} {{filename}}"
+  editInTerminal: true
+  openDirInEditor: "avim {{dir}}"
+gui:
+  theme:
+    activeBorderColor:
+      - "#B4C7ED"
+      - bold
+    inactiveBorderColor:
+      - "#72757E"
+    optionsTextColor:
+      - "#B4C7ED"
+    selectedLineBgColor:
+      - "#171A1F"
+    selectedRangeBgColor:
+      - "#171A1F"
+    cherryPickedCommitFgColor:
+      - "#B4C7ED"
+    cherryPickedCommitBgColor:
+      - "#171A1F"
+    markedBaseCommitFgColor:
+      - "#FFF17B"
+    markedBaseCommitBgColor:
+      - "#171A1F"
+    unstagedChangesColor:
+      - "#FF9BAD"
+    defaultFgColor:
+      - "#E3E5EF"
+  nerdFontsVersion: "3"
+  showBranchCommitHash: true

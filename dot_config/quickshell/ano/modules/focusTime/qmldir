@@ -1,0 +1,3 @@
+module qs.modules.focusTime
+FocusTimeContent 1.0 FocusTimeContent.qml
+FocusTimePanel 1.0 FocusTimePanel.qml

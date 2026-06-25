@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Toggle gamemode: disables animations, blur, and decorations for better performance
+# Bind: SUPER+F1
+
+HYPRGAMEMODE=$(hyprctl getoption animations:enabled -j | jq '.int')
+
+if [ "$HYPRGAMEMODE" = 1 ]; then
+    hyprctl --batch "\
+        keyword animations:enabled 0;\
+        keyword decoration:shadow:enabled 0;\
+        keyword decoration:blur:enabled 0;\
+        keyword general:gaps_in 0;\
+        keyword general:gaps_out 0;\
+        keyword general:border_size 1;\
+        keyword decoration:rounding 0"
+    notify-send -u low "Gamemode" "ON — animations & effects disabled"
+else
+    hyprctl reload
+    notify-send -u low "Gamemode" "OFF — config reloaded"
+fi

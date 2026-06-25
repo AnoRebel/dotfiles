@@ -1,0 +1,14 @@
+profile default {
+  output eDP-1 mode 1366x768@60 position 0,0
+}
+
+profile work {
+  output eDP-1 mode 1366x768@60 position 0,0
+  output "Dell Inc. DELL S2725H 1677J04" mode 1920x1080@100 position 1366,0
+}
+
+profile home {
+  output eDP-1 mode 1366x768@60 position 0,0
+  output "HP Inc. HP M27f FHD 3CM14905YJ" mode 1920x1080@60 position 1366,0
+}
+

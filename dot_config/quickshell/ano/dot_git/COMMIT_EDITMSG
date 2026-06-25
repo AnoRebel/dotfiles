@@ -1,0 +1,27 @@
+fix(bar,appearance): restore bar background + clear layout warnings
+
+The bar rendered with no background (content floating on the
+wallpaper) because Appearance.backgroundTransparency evaluated
+undefined while appearance.transparency was still loading, which
+NaN-poisoned the entire colLayer* pipeline. Optional-chain the
+transparency reads with an opaque, non-automatic fallback.
+
+Also resolved the cascade of layout warnings now that bars
+actually instantiate:
+
+- BarContent center section: top+bottom+verticalCenter was an
+  over-specified anchor conflict; verticalCenter dropped (top
+  and bottom already pin the vertical extent).
+- BarGroup: gained showBackground/backgroundColor/backgroundRadius
+  properties. BarContent now configures the center pill via these
+  instead of injecting a child Rectangle, which the default alias
+  was misrouting into the inner GridLayout (anchored item in a
+  layout = undefined behavior).
+- implicitWidth/Height ternaries returning undefined (BarWindow
+  50/106, BarContent separator) now return 0; the inactive axis
+  is governed by anchors/Layout.fill anyway.
+- StyledPopup reparent loop now skips non-visual children
+  (Connections/Timer/models have no `parent` property).
+
+Shell loads with zero ano-code warnings; remainder are
+third-party tray icons and system SVG theme issues.

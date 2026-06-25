@@ -1,0 +1,5 @@
+module qs.panelFamilies
+AnoFamily 1.0 AnoFamily.qml
+CleanFamily 1.0 CleanFamily.qml
+HeftyFamily 1.0 HeftyFamily.qml
+MinimalFamily 1.0 MinimalFamily.qml

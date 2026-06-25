@@ -1,0 +1,54 @@
+{
+  "_meta": {
+    "name": "Aurora",
+    "description": "Aurora glass — professional, elegant translucency. Built on the inir-dark base palette, with high transparency for a layered glass look. Pairs best with a high-contrast wallpaper visible behind shell surfaces.",
+    "darkmode": true
+  },
+
+  "background": "#06070b",
+  "on_background": "#E3E6F0",
+  "surface": "#06070b",
+  "surface_dim": "#05060a",
+  "surface_bright": "#141825",
+  "surface_container_lowest": "#040508",
+  "surface_container_low": "#0B0E16",
+  "surface_container": "#111522",
+  "surface_container_high": "#161B28",
+  "surface_container_highest": "#1B2233",
+  "on_surface": "#E3E6F0",
+  "surface_variant": "#3D455A",
+  "on_surface_variant": "#C3CAD9",
+  "inverse_surface": "#E3E6F0",
+  "inverse_on_surface": "#151822",
+  "outline": "#707894",
+  "outline_variant": "#3D455A",
+  "shadow": "#000000",
+  "scrim": "#000000",
+  "surface_tint": "#1F6CFF",
+
+  "primary": "#1F6CFF",
+  "on_primary": "#0A1020",
+  "primary_container": "#12244A",
+  "on_primary_container": "#C7D4FF",
+  "inverse_primary": "#8CACFF",
+
+  "secondary": "#9AA5C0",
+  "on_secondary": "#151925",
+  "secondary_container": "#242C40",
+  "on_secondary_container": "#D6DDF0",
+
+  "tertiary": "#A6B5D6",
+  "on_tertiary": "#152237",
+  "tertiary_container": "#293349",
+  "on_tertiary_container": "#D7E0F0",
+
+  "error": "#ffb4ab",
+  "on_error": "#690005",
+  "error_container": "#93000a",
+  "on_error_container": "#ffdad6",
+
+  "glass_opacity": 0.58,
+  "glass_blur": 18,
+  "glass_border_color": "#5A6789",
+  "glass_border_width": 1
+}

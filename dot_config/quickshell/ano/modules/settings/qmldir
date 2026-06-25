@@ -1,0 +1,17 @@
+module qs.modules.settings
+AboutPage 1.0 AboutPage.qml
+AnoSpotConfig 1.0 AnoSpotConfig.qml
+AppearanceConfig 1.0 AppearanceConfig.qml
+BarConfig 1.0 BarConfig.qml
+DockConfig 1.0 DockConfig.qml
+GeneralConfig 1.0 GeneralConfig.qml
+ModulesConfig 1.0 ModulesConfig.qml
+OverviewConfig 1.0 OverviewConfig.qml
+ServicesConfig 1.0 ServicesConfig.qml
+SettingsCard 1.0 SettingsCard.qml
+SettingsCommandPalette 1.0 SettingsCommandPalette.qml
+SettingsKeyHandler 1.0 SettingsKeyHandler.qml
+SettingsOverlay 1.0 SettingsOverlay.qml
+SettingsPageHeader 1.0 SettingsPageHeader.qml
+singleton SettingsRegistry 1.0 SettingsRegistry.qml
+SidebarsConfig 1.0 SidebarsConfig.qml

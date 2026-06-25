@@ -1,0 +1,59 @@
+@import url("../../.cache/wal/colors-waybar.css");
+
+@keyframes fadeIn {
+  0% {
+    padding-left: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  100% {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+* {
+  font-family: "FiraCode Nerd Font Propo";
+}
+
+window {
+  background-color: alpha(@background, 0.95);
+  color: @color9;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  /* background: alpha(@color9, 0.3); */
+  animation: fadeIn 0.5s ease-in-out;
+  border-radius: 0.818rem;
+}
+
+/* search entry */
+entry {
+  /* background-color: rgba (0, 0, 0, 0.2) */
+  background-color: alpha(@color2, 0.4);
+}
+
+button,
+image {
+  background: none;
+  border: none;
+}
+
+button:hover {
+  /* background-color: rgba (255, 255, 255, 0.1) */
+  background-color: alpha(@color2, 0.6);
+}
+
+/* in case you wanted to give category buttons a different look */
+#category-button {
+  margin: 0 10px 0 10px;
+}
+
+#pinned-box {
+  padding-bottom: 5px;
+  border-bottom: 1px dotted gray;
+}
+
+#files-box {
+  padding: 5px;
+  border: 1px dotted gray;
+  border-radius: 15px;
+}

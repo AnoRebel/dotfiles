@@ -1,0 +1,101 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "edit_predictions": {
+    "provider": "zed",
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "dock": "right",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+  },
+  "context_servers": {
+    "context7": {
+      "enabled": true,
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+    },
+    "sequential-thinking": {
+      "enabled": true,
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/arben-adm/mcp-sequential-thinking",
+        "--with",
+        "portalocker",
+        "mcp-sequential-thinking",
+      ],
+    },
+    "serena": {
+      "enabled": true,
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+      ],
+    },
+    "memory": {
+      "enabled": true,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": "memory.json",
+      },
+    },
+    "fetch": {
+      "enabled": true,
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+    },
+    "shadcn-ui-vue": {
+      "enabled": true,
+      "command": "npx",
+      "args": ["-y", "@jpisnice/shadcn-ui-mcp-server", "--framework", "vue"],
+    },
+    "shadcn-ui-react": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@jpisnice/shadcn-ui-mcp-server", "--framework", "react"],
+    },
+    "nuxt": {
+      "enabled": true,
+      "url": "https://nuxt.com/mcp",
+    },
+  },
+  "base_keymap": "SublimeText",
+  "vim_mode": false,
+  "telemetry": {
+    "metrics": false,
+  },
+  "ui_font_size": 14,
+  "ui_font_family": "JetBrainsMono NF",
+  "buffer_font_size": 14,
+  "buffer_font_family": "FiraCode NF",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha",
+  },
+}

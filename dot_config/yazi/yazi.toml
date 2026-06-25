@@ -1,0 +1,33 @@
+[plugin]
+prepend_previewers = [
+  { mime = "audio/*",   run = "exifaudio"},
+  # { mime = "image/*", run = "mediainfo"},
+  # { mime = "{image,audio,video}/*", run = "mediainfo"},
+  { mime = "application/subrip", run = "mediainfo"},
+  { mime = "application/bittorrent", run = "torrent-preview"},
+  { mime = "*.torrent", run = "torrent-preview"},
+  { mime = "text/markdown", name = "*.md", run = "glow" },
+  { mime = "text/csv", run = "duckdb" },
+  { mime = "text/tsv", name = ".tsv", run = "duckdb" },
+  { mime = "parquet", name = "*.parquet", run = "duckdb" },
+  # Archive previewer
+	{ mime = "application/{*zip,tar,bzip*,7z-compressed,rar,xz}",            run = "ouch" },
+  { mime = "*", name = "*/", run = "eza-preview" },
+]
+prepend_preloaders = [
+  { mime = "text/csv", run = "duckdb", multi = false },
+  { mime = "text/tsv", name = ".tsv", run = "duckdb", multi = false },
+  { mime = "parquet", name = "*.parquet", run = "duckdb", multi = false },
+]
+prepend_fetchers = [
+  { id = "git", name = "*", run = "git", group = "git", mime = "git" },
+  { id = "git", name = "*/", run = "git", group = "git", mime = "git" },
+  { id = "current-size", name = "*/", run = "current-size", prio = "normal", group = "current-size", mime = "*" },
+	{ id = "current-size", name = "*", run = "current-size",prio = "normal", group = "current-size", mime = "*" },
+]
+
+[opener]
+extract = [
+	{ run = 'ouch d -y "%*"', desc = "Extract here with ouch", for = "windows" },
+	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]

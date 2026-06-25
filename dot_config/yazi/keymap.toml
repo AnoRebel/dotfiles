@@ -1,0 +1,27 @@
+[mgr]
+prepend_keymap = [
+  { on = "M", run = "plugin mount", desc = "Mount and Umount external and network drives" },
+  { on = "p", run = "plugin smart-paste", desc = "Paste into the hovered directory or CWD" },
+  { on = "t", run = "plugin smart-tab", desc = "Create a tab and enter the hovered directory" },
+  # { on = "l", run = "plugin --sync fast-enter", desc = "Enter the subfolder faster, or open the file directly" },
+	{ on = [ "E" ], run = "plugin eza-preview",  desc = "Toggle tree/list dir preview" },
+  { on   = "<A-s>", run  = "plugin what-size", desc = "Calc size of selection or cwd" },
+  # { on = "u", run = "plugin restore", desc = "Restore last deleted files/folders" },
+    # or du like me
+  { on = "u", run = "plugin restore", desc = "Restore last deleted files/folders" },
+  { on = "<C-1>", run = "plugin toggle-view parent", desc = "Toggle parent" },
+  { on = "<C-2>", run = "plugin toggle-view current", desc = "Toggle current" },
+  { on = "<C-3>", run = "plugin toggle-view preview", desc = "Toggle preview" },
+  { on = "C", run = "plugin ouch zip", desc = "Compress with ouch" },
+  { on = [ "g", "i" ], run = "plugin lazygit", desc = "run lazygit" },
+  { on = "<C-d>", run = "plugin diff", desc = "Diff the selected with the hovered file" },
+  { on = "T", run = "plugin hide-preview", desc = "Hide or show preview" },
+  { on = [ "c", "a" ], run = "plugin compress", desc = "Archive selected files" },
+  { on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files" },
+  { on  = "<C-n>", run = '''
+	                        shell 'dragon -x -i -T "$1"'
+                        ''', desc = "Drag and drop via dragon" },
+  { on = "!", run = 'shell "$SHELL" --block', desc = "Open shell here" },
+  # { on = "K", run = "plugin parent-arrow -1", desc = "Navigation in the parent directory without leaving the CWD" }, # plugin --sync parent-arrow-skip --args=-1
+  # { on = "J", run = "plugin parent-arrow 1", desc = "Navigation in the parent directory without leaving the CWD" }, # plugin --sync parent-arrow-skip --args=1
+]

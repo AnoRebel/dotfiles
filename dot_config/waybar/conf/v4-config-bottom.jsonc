@@ -1,0 +1,75 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 25,
+  "modules-left": ["custom/launch_menu", "custom/launch_brave", "custom/launch_kitty", "custom/launch_nemo"],
+  "modules-center": ["wlr/taskbar"],
+  "modules-right": ["custom/weather", "custom/launch_drawer"],
+
+  "include": ["~/.config/waybar/conf/mesu.jsonc"],
+
+  "custom/launch_firefox": {
+    "format": " ",
+    "on-click": "firefox",
+    "tooltip": false
+  },
+
+  "custom/launch_brave": {
+    "format": " ",
+    "on-click": "brave",
+    "tooltip": false
+  },
+
+  "custom/launch_thunderbird": {
+    "format": "󰇰 ",
+    "on-click": "thunderbird",
+    "tooltip": false
+  },
+
+  "custom/launch_nemo": {
+    "format": " ",
+    "on-click": "exec nemo",
+    "tooltip": false
+  },
+
+  "custom/launch_kitty": {
+    "format": "",
+    "on-click": "exec kitty",
+    "tooltip": false
+  },
+
+  "custom/launch_wofi": {
+    "format": "󱗼",
+    "on-click": "sh -c '(sleep 0.5s; pkill wofi || wofi -c ~/.config/wofi/config-lmenu)' & disown",
+    "tooltip": false
+  },
+
+  "custom/launch_menu": {
+    "format": " 󱗼 ",
+    "on-click": "nwg-menu -cmd-logout='hyprctl dispatch exit 0' -fm 'nemo' -term 'kitty'",
+    "tooltip": false
+  },
+
+  "custom/launch_drawer": {
+    "format": "󱗼 ",
+    "on-click": "nwg-drawer -fm 'nemo'",
+    "tooltip": false
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 24,
+    "all-outputs": true,
+    "tooltip-format": "{name} - {title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": ["wofi"],
+    "app_ids-mapping": {
+      "steam_app_39210": "Final Fantasy 14"
+    }
+  }
+}

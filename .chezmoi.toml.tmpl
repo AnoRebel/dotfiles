@@ -1,0 +1,24 @@
+encryption = "age"
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "age1ytyarpug0hlclnygr22f6rzsakqfs6tyzndxrnrchzyzgq65a46qg2t8a7"
+
+[edit]
+    command = "avim"
+    args = ["-f"]
+
+[diff]
+    # pager = "delta"
+    # pager = "hunky"
+    # pager = "diff-so-fancy"
+    command = "meld"
+    args = ["--diff", "{{ .Destination }}", "{{ .Target }}"]
+
+[merge]
+    command = "avim"
+    args = [
+        "-d",
+        "{{ .Destination }}",
+        "{{ .Source }}",
+        "{{ .Target }}"
+    ]

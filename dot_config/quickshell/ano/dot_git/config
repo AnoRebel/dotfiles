@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+	name = Ano Rebel
+	email = hacker4rebel@gmail.com
+[remote "origin"]
+	url = https://github.com/AnoRebel/AnoShell.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

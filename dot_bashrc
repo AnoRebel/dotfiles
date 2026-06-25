@@ -1,0 +1,299 @@
+[[ $- == *i* ]] && source /usr/share/blesh/ble.sh --noattach
+### Added by Codeium. These lines cannot be automatically removed if modified
+# if command -v termium > /dev/null 2>&1; then
+#   eval "$(termium shell-hook show pre)"
+# fi
+### End of Codeium integration
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+	PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
+
+export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
+
+alias wetha='curl -s "http://wttr.in/~Dar-es-salaam" | head -n 38'
+alias chuga='curl -s "http://wttr.in/~Arusha" | head -n 38'
+
+alias pgadmin='cd ~/adminer ; nohup php -S 127.0.0.1:3066 &>logs & ; brave-browser 127.0.0.1:3066 & ; cd'
+alias lg="lazygit"
+
+alias py='python3'
+alias py2='python2'
+
+alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-update-all='export TMPFILE="$(mktemp)"; \
+    sudo true; \
+    rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+      && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+      && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+      && ua-drop-caches \
+      && yay -Syyu --noconfirm'
+
+alias bashrc='nvim ~/.bashrc'
+
+alias please="sudo"
+alias icat="kitty +kitten icat"
+alias d="kitty +kitten diff"
+
+alias c="clear"
+alias q="exit"
+alias aptclean="sudo apt clean ; sudo apt autoclean ; sudo apt autoremove"
+alias aptupd="sudo apt update"
+alias aptupg="sudo apt upgrade"
+alias aptinstall="sudo apt install"
+alias aptremove="sudo apt remove"
+
+export EDITOR="avim"
+# export VISUAL=""
+export BROWSER="zen-browser"
+# export BROWSER="brave"
+export PLAYER="celluloid"
+export IMAGEVIEWER="sxiv"
+export TERMINAL="kitty"
+
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :400 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --icons --color=always {} | head -200'"
+
+function nvims() {
+	configs=("default" "AstroNvim" "LazyVim" "NormalNvim" "NvIDE")
+	config=$(printf "%s\n" "${configs[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
+	if [[ -z $config ]]; then
+		echo "Nothing selected"
+		return 0
+	elif [[ $config == "default" ]]; then
+		config=""
+	fi
+	NVIM_APPNAME=$config nvim $@
+}
+
+# Markdown reader
+mdr() {
+	pandoc $1 | lynx -stdin
+}
+
+# User Functions
+mkcd() {
+	command mkdir -p $1 && cd $2
+}
+
+rga-fzf() {
+	RG_PREFIX="rga --files-with-matches"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+			--phony -q "$1" \
+			--bind "change:reload:$RG_PREFIX {q}" \
+			--preview-window="70%:wrap"
+	)" &&
+		echo "opening $file" &&
+		xdg-open "$file"
+}
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex() {
+	if [ -f $1 ]; then
+		case $1 in
+		*.tar.bz2) tar xjf $1 ;;
+		*.tar.gz) tar xzf $1 ;;
+		*.bz2) bunzip2 $1 ;;
+		*.rar) unrar x $1 ;;
+		*.gz) gunzip $1 ;;
+		*.tar) tar xf $1 ;;
+		*.tbz2) tar xjf $1 ;;
+		*.tgz) tar xzf $1 ;;
+		*.zip) unzip $1 ;;
+		*.Z) uncompress $1 ;;
+		*.7z) 7z x $1 ;;
+		*) echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
+
+function yz() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+#[[ $- == *i* ]] && source $HOME/ble.sh/out/ble.sh --noattach
+
+# Path to your oh-my-bash installation.
+# export OSH=/home/ano/.oh-my-bash
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-bash is loaded.
+OSH_THEME="agnoster"
+
+# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
+# Custom completions may be added to ~/.oh-my-bash/custom/completions/
+# Example format: completions=(ssh git bundler gem pip pip3)
+# Add wisely, as too many completions slow down shell startup.
+completions=(
+	git
+	composer
+	ssh
+)
+
+# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
+# Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
+# Example format: aliases=(vagrant composer git-avh)
+# Add wisely, as too many aliases slow down shell startup.
+aliases=(
+	general
+)
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
+# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+	git
+	battery
+	progress
+)
+
+# source $OSH/oh-my-bash.sh
+
+# User configuration
+
+if [ -f /etc/bash.command-not-found ]; then
+	. /etc/bash.command-not-found
+fi
+
+source <(kitty + complete setup bash)
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-bash libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-bash
+# users are encouraged to define aliases within the OSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias bashconfig="mate ~/.bashrc"
+# alias ohmybash="mate ~/.oh-my-bash"
+
+alias copy='rsync -rP'
+alias alert='notify-send -u low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# open file with default program base on extension
+# Ex: 'alias -s avi=mplayer' makes 'file.avi' execute 'mplayer file.avi'
+#alias -s {avi,flv,mkv,mp4,mpeg,mpg,ogv,wmv}=$PLAYER
+#alias -s {flac,mp3,ogg,wav}=$MUSICER
+#alias -s {gif,GIF,jpeg,JPEG,jpg,JPG,png,PNG}="background $IMAGEVIEWER"
+#alias -s {djvu,pdf,ps}="background $READER"
+#alias -s txt=$EDITOR
+#alias -s epub="background $EBOOKER"
+#alias -s {cbr,cbz}="background $COMICER"
+#alias -s {cbr,cbz}="background $COMICER"
+# might conflict with emacs org mode
+#alias -s {at,ch,com,de,net,org}="background $BROWSER"
+
+alias ls='eza -hUumF --icons --git --git-repos --color=automatic --color-scale=all --smart-group'
+alias l='ls -l'
+alias la='ls -a'
+alias lr='ls -ar'
+alias lla='ls -aHl'
+alias llr='ls -aHlr'
+alias lt='ls --tree --level=2 --git-ignore'
+alias llt='ls -l --tree --git-ignore'
+
+export PATH='$HOME/.duckdb/cli/latest':$PATH
+
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/usr/lib/dart/bin"
+
+# Adding Go home and bin to path
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+export PATH="$PATH:$HOME/flutter/bin"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Opt-out of DOTNET Telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
+
+# Cargo installation
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# . $HOME/z/z.sh
+eval "$(zoxide init bash)"
+
+# eval "$(pipenv --completion)"
+eval "$(register-python-argcomplete pipx)"
+
+export KERL_CONFIGURE_OPTIONS="--with-odbc=/var/lib/pacman/local/unixodbc-$(pacman -Q unixodbc | cut -d' ' -f2)"
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+export PATH="$PATH:/opt/mssql-tools18/bin"
+
+. "$HOME/.cargo/env"
+
+# source ~/.bash_completions/alacritty
+
+eval "$($HOME/.local/bin/mise activate bash)"
+
+# Turso
+export PATH="$HOME/.turso:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
+# Add .NET Core SDK tools
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+eval "$(atuin init bash)"
+
+# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# source <(carapace _carapace)
+
+source "$HOME/.bash_completions/please.sh"
+source "$HOME/.local/share/bash-completion/completions/deno.bash"
+
+[[ ${BLE_VERSION-} ]] && ble-attach
+export PATH=$PATH:/home/ano/go/bin
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi

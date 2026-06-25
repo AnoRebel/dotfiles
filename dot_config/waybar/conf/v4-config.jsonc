@@ -1,0 +1,229 @@
+{
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 20,
+  "modules-left": ["custom/power_btn", "custom/lock_screen", "hyprland/workspaces"],
+  "modules-center": ["idle_inhibitor", "clock", "custom/updates"],
+  "modules-right": [
+    // "cpu",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    // "backlight",
+    "custom/notification",
+    // "temperature",
+    // "custom/power_profile",
+    "battery",
+    // "hyprland/language",
+    // "custom/myhyprv",
+    "tray",
+    "custom/light_dark",
+  ],
+
+  "include": [
+    "~/.config/waybar/conf/mesu.jsonc",
+    // "~/.config/waybar/conf/asus-rog.jsonc",
+    "~/.config/waybar/conf/hyprv-util.jsonc",
+  ],
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰛐",
+      "deactivated": "󰛑",
+    },
+    "tooltip": true,
+  },
+
+  "hyprland/language": {
+    "interval": 30,
+    "format": " {}",
+    "keyboard-name": "logitech-pro-gaming-keyboard",
+    "on-click": "~/.config/hypr/hyprv_util swkb",
+    "signal": 8,
+  },
+
+  "custom/power_btn": {
+    "format": "",
+    "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
+    "tooltip": false,
+  },
+
+  "custom/lock_screen": {
+    "format": "",
+    "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
+    "tooltip": false,
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false, // true,
+    "on-click": "activate",
+    "persistent_workspaces": {
+      "*": 3, // 3 workspaces by default on every monitor
+      // "HDMI-A-1": 5 // but only five on HDMI-A-1
+      // "1": [],
+      // "2": [],
+      // "3": [],
+      // "4": [],
+      // "5": [],
+      // "6": [],
+      // "7": []
+      // "8": [],
+      // "9": [],
+      // "10": []
+    },
+  },
+
+  "hyprland/submap": {
+    "format": "✌️ {}",
+    "max-length": 8,
+    "tooltip": false,
+  },
+
+  "cpu": {
+    "interval": 10,
+    "format": "",
+    "max-length": 10,
+    "format-alt-click": "click-right",
+    "format-alt": " {usage}%",
+    "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'",
+  },
+
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 20,
+    },
+    "format": "{icon}",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt-click": "click-right",
+    "format-alt": "{icon} {capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "",
+    "on-click": "~/.config/waybar/scripts/volume --toggle",
+    "on-click-right": "pypr toggle volume",
+    // "on-click-right": "pavucontrol",
+    "on-scroll-up": "~/.config/waybar/scripts/volume --inc",
+    "on-scroll-down": "~/.config/waybar/scripts/volume --dec",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+    },
+    "tooltip": true,
+    "tooltip-format": "{icon} at {volume}%",
+  },
+
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "on-click": "~/.config/waybar/scripts/volume --toggle-mic",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "~/.config/waybar/scripts/volume --mic-inc",
+    "on-scroll-down": "~/.config/waybar/scripts/volume --mic-dec",
+    "scroll-step": 5,
+    "tooltip": true,
+    "tooltip-format": " at {volume}%",
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "format-alt-click": "click-right",
+    "format-alt": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "~/.config/waybar/scripts/brightness --inc",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness --dec",
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10,
+  },
+
+  "clock": {
+    "format": "{:%H:%M}  ",
+    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      // "on-click-forward": "tz_up",
+      // "on-click-backward": "tz_down",
+      // "on-scroll-up": "shift_up",
+      // "on-scroll-down": "shift_down"
+    },
+  },
+
+  "custom/notifications": {
+    "format": "{icon} {}",
+    "format-icons": [" "],
+    "icon-size": 18,
+    "exec": "swaync-client -c",
+    "on-click": "sh -c 'sleep 0.1s; swaync-client -t -sw; sleep 0.1s'",
+    "interval": 5,
+    "exec-if": "pgrep swaync",
+    "tooltip": true,
+    "tooltip-format": "{} notifications",
+  },
+
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{} {icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": " ",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": " ",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": " ",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": " ",
+    },
+    // "max-length": 10,
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    // "on-click": "sleep 0.1; swaync-client -t -sw; sleep 0.1",
+    "on-click-release": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
+
+  "custom/updates": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/update-sys",
+    "on-click": "~/.config/waybar/scripts/update-sys update",
+    "interval": 300,
+    "tooltip": true,
+  },
+}

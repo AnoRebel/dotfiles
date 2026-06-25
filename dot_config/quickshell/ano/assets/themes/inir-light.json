@@ -1,0 +1,54 @@
+{
+  "_meta": {
+    "name": "Inir Light",
+    "description": "Light-mode counterpart to inir-dark. Same electric-blue accent on a near-white surface palette, designed for bright environments and high-ambient-light desks.",
+    "darkmode": false
+  },
+
+  "background": "#F5F7FB",
+  "on_background": "#0F1320",
+  "surface": "#F5F7FB",
+  "surface_dim": "#E2E6EE",
+  "surface_bright": "#FFFFFF",
+  "surface_container_lowest": "#FFFFFF",
+  "surface_container_low": "#EEF1F8",
+  "surface_container": "#E7EBF4",
+  "surface_container_high": "#DEE3EE",
+  "surface_container_highest": "#D4DAE7",
+  "on_surface": "#0F1320",
+  "surface_variant": "#D7DCE8",
+  "on_surface_variant": "#454C5E",
+  "inverse_surface": "#1B2233",
+  "inverse_on_surface": "#EEF1F8",
+  "outline": "#6B7388",
+  "outline_variant": "#BDC3D2",
+  "shadow": "#000000",
+  "scrim": "#000000",
+  "surface_tint": "#1F6CFF",
+
+  "primary": "#1F6CFF",
+  "on_primary": "#FFFFFF",
+  "primary_container": "#D7E2FF",
+  "on_primary_container": "#001A41",
+  "inverse_primary": "#8CACFF",
+
+  "secondary": "#475067",
+  "on_secondary": "#FFFFFF",
+  "secondary_container": "#DCE2F2",
+  "on_secondary_container": "#101828",
+
+  "tertiary": "#5C6E80",
+  "on_tertiary": "#FFFFFF",
+  "tertiary_container": "#E0E7F0",
+  "on_tertiary_container": "#172230",
+
+  "error": "#BA1A1A",
+  "on_error": "#FFFFFF",
+  "error_container": "#FFDAD6",
+  "on_error_container": "#410002",
+
+  "glass_opacity": 0.94,
+  "glass_blur": 0,
+  "glass_border_color": "#BDC3D2",
+  "glass_border_width": 1
+}

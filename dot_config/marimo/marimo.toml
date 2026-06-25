@@ -1,0 +1,35 @@
+[formatting]
+line_length = 79
+
+[server]
+browser = "min"
+follow_symlink = false
+
+[package_management]
+manager = "pip"
+
+[keymap]
+preset = "default"
+
+[keymap.overrides]
+
+[display]
+theme = "dark"
+code_editor_font_size = 14
+cell_output = "above"
+default_width = "medium"
+dataframes = "rich"
+
+[runtime]
+auto_instantiate = true
+auto_reload = "off"
+on_cell_change = "autorun"
+
+[completion]
+activate_on_typing = true
+copilot = false
+
+[save]
+autosave = "after_delay"
+autosave_delay = 1000
+format_on_save = false

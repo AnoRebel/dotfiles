@@ -1,0 +1,5 @@
+module qs.modules.sidebarLeft
+AiChat 1.0 AiChat.qml
+SidebarLeftContent 1.0 SidebarLeftContent.qml
+SidebarLeft 1.0 SidebarLeft.qml
+Translator 1.0 Translator.qml

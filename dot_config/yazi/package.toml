@@ -1,0 +1,27 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "c648526"
+hash = "bf6f074cd41ee33c3360341d168f9733"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "c648526"
+hash = "277ba273e5d3d647feb5808d0fe4e4e0"
+
+[[plugin.deps]]
+use = "wylie102/duckdb"
+rev = "3f8c863"
+hash = "87b9233a74325e95011670ed20bbd0d4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "c648526"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "1ee69a5"
+hash = "63679f3daf8551ff8755be38b5ced0f"
+
+[flavor]
+deps = []

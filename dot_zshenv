@@ -1,0 +1,53 @@
+# PATH
+export PATH="/usr/bin:/usr/local/bin:/bin:$PATH"
+
+# user bins
+# set PATH so it includes user's private bin if it exists
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+# set PATH so it includes user's private bin if it exists
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+
+PATH="$HOME/.local/share/mise/shims:$PATH"
+
+PATH="$HOME/.duckdb/cli/latest:$PATH"
+
+PATH="$PATH:/usr/local/go/bin"
+PATH="$PATH:/usr/lib/dart/bin"
+
+# Claude Code fix
+#export CLAUDE_SHELL=/usr/bin/zsh
+#export CLAUDE_SHELL="${SHELL:-/usr/bin/zsh}"
+
+# Go
+export GOPATH="$HOME/go"
+PATH="$PATH:$GOPATH/bin"
+
+# Cargo
+PATH="$HOME/.cargo/bin:$PATH"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+PATH="$BUN_INSTALL/bin:$PATH"
+
+# Deno
+export DENO_INSTALL="$HOME/.deno"
+PATH="$DENO_INSTALL/bin:$PATH"
+
+# Turso + nvim
+PATH="$HOME/.turso:$PATH"
+PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
+# .NET
+PATH="$PATH:$HOME/.dotnet/tools"
+
+# Flutter
+PATH="$PATH:$HOME/flutter/bin"
+
+# Yarn
+PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Misc
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+# export PATH="$PATH:/opt/mssql-tools18/bin"
+
+export PATH

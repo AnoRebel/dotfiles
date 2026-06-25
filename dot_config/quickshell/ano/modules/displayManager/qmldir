@@ -1,0 +1,3 @@
+module qs.modules.displayManager
+DisplayManagerContent 1.0 DisplayManagerContent.qml
+DisplayManager 1.0 DisplayManager.qml

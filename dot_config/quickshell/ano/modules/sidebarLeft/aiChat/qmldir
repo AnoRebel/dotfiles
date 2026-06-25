@@ -1,0 +1,4 @@
+module qs.modules.sidebarLeft.aiChat
+AiMessageControlButton 1.0 AiMessageControlButton.qml
+AiMessage 1.0 AiMessage.qml
+MessageTextBlock 1.0 MessageTextBlock.qml

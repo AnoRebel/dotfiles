@@ -1,0 +1,5 @@
+module qs.modules.bar
+BarContent 1.0 BarContent.qml
+BarGroup 1.0 BarGroup.qml
+BarManager 1.0 BarManager.qml
+BarWindow 1.0 BarWindow.qml

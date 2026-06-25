@@ -1,0 +1,54 @@
+{
+  "_meta": {
+    "name": "Angel",
+    "description": "Angel glass — bright, soft, ethereal. Light surfaces with high translucency and a peach accent. Best on cool-toned wallpapers; the high glass opacity is intentional and shows the desktop through every surface.",
+    "darkmode": false
+  },
+
+  "background": "#FAF6F2",
+  "on_background": "#1F1B17",
+  "surface": "#FAF6F2",
+  "surface_dim": "#E0DBD5",
+  "surface_bright": "#FFFFFF",
+  "surface_container_lowest": "#FFFFFF",
+  "surface_container_low": "#F4EFE9",
+  "surface_container": "#EEE9E2",
+  "surface_container_high": "#E8E2DB",
+  "surface_container_highest": "#E1DBD3",
+  "on_surface": "#1F1B17",
+  "surface_variant": "#E5DDD3",
+  "on_surface_variant": "#4A4540",
+  "inverse_surface": "#33302C",
+  "inverse_on_surface": "#F4EFE9",
+  "outline": "#7C766E",
+  "outline_variant": "#CDC6BC",
+  "shadow": "#000000",
+  "scrim": "#000000",
+  "surface_tint": "#C36E3E",
+
+  "primary": "#C36E3E",
+  "on_primary": "#FFFFFF",
+  "primary_container": "#FFDBC9",
+  "on_primary_container": "#3D1300",
+  "inverse_primary": "#FFB590",
+
+  "secondary": "#9C7A66",
+  "on_secondary": "#FFFFFF",
+  "secondary_container": "#FFDBC9",
+  "on_secondary_container": "#352114",
+
+  "tertiary": "#7A8A4E",
+  "on_tertiary": "#FFFFFF",
+  "tertiary_container": "#DCEBC4",
+  "on_tertiary_container": "#1C2A0E",
+
+  "error": "#BA1A1A",
+  "on_error": "#FFFFFF",
+  "error_container": "#FFDAD6",
+  "on_error_container": "#410002",
+
+  "glass_opacity": 0.62,
+  "glass_blur": 22,
+  "glass_border_color": "#D9D2C6",
+  "glass_border_width": 1
+}

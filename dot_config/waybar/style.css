@@ -1,0 +1,222 @@
+@import url("../../.cache/wal/colors-waybar.css");
+
+* {
+  font-size: 15px;
+  font-family: "FiraCode Nerd Font Propo";
+}
+window#waybar {
+  all: unset;
+}
+.modules-left {
+  padding: 3px;
+  margin: 3px;
+  border-radius: 10px;
+  background: alpha(@background, 0.7);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+.modules-center {
+  padding: 3px;
+  margin: 3px;
+  border-radius: 10px;
+  background: alpha(@background, 0.7);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+.modules-right {
+  padding: 3px;
+  margin: 3px;
+  border-radius: 10px;
+  background: alpha(@background, 0.7);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+tooltip {
+  background: @background;
+  color: @color7;
+}
+#clock:hover,
+#custom-pacman:hover,
+#custom-updates:hover,
+#custom-launch_menu:hover,
+#custom-launch_wofi:hover,
+#custom-notification:hover,
+#custom-weather:hover,
+#custom-colorpicker:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover {
+  transition: all 0.3s ease;
+  color: @color9;
+}
+#custom-notification {
+  padding: 0px 3px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#clock {
+  padding: 0px 3px;
+  color: @color7;
+  transition: all 0.3s ease;
+}
+#custom-pacman,
+#custom-updates {
+  padding: 0px 3px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#workspaces {
+  padding: 0px 3px;
+}
+#workspaces button {
+  all: unset;
+  padding: 0px 3px;
+  color: alpha(@color9, 0.4);
+  transition: all 0.2s ease;
+}
+#workspaces button:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+}
+#workspaces button.active {
+  color: @color9;
+  border: none;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+#workspaces button.empty {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.2);
+}
+#workspaces button.empty:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+}
+#workspaces button.empty.active {
+  color: @color9;
+  border: none;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+#bluetooth {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#network {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#battery {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#battery.charging {
+  color: #26a65b;
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#group-expand {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+#custom-expand {
+  padding: 0px 5px;
+  color: alpha(@foreground, 0.5);
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
+}
+#custom-expand:hover {
+  color: rgba(255, 255, 255, 0.2);
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+}
+#custom-colorpicker {
+  padding: 0px 5px;
+}
+#cpu,
+#memory,
+#temperature {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+#custom-endpoint {
+  color: transparent;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+}
+#tray {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+#tray menu * {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#custom-launch_wofi,
+#custom-launch_menu,
+#custom-power_btn,
+#custom-power_profile,
+#custom-weather,
+#window,
+#cpu,
+#disk,
+#custom-updates,
+#memory,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#tray,
+#temperature,
+#workspaces,
+#idle_inhibitor,
+#backlight {
+  background: rgba(21, 18, 27, 0);
+  opacity: 1;
+  padding: 0px 5px;
+  margin: 0px 3px;
+  border: 0px;
+}
+
+#custom-weather {
+  margin-left: 0px;
+  border-right: 0px;
+  font-size: 14px;
+  margin-right: 0px;
+}
+
+#custom-power_btn {
+  margin-right: 10px;
+}
+
+#custom-launch_wofi,
+#custom-launch_menu {
+  margin-left: 0;
+  border-right: 0;
+  font-size: 20px;
+  margin-right: 6px;
+}

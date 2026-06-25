@@ -1,0 +1,20 @@
+module qs.modules.bar.modules
+ActiveWindowModule 1.0 ActiveWindowModule.qml
+singleton BarModuleLoader 1.0 BarModuleLoader.qml
+BatteryModule 1.0 BatteryModule.qml
+BluetoothModule 1.0 BluetoothModule.qml
+ClockModule 1.0 ClockModule.qml
+GameModeModule 1.0 GameModeModule.qml
+IdleModule 1.0 IdleModule.qml
+KeyboardModule 1.0 KeyboardModule.qml
+MediaModule 1.0 MediaModule.qml
+NetworkModule 1.0 NetworkModule.qml
+NotificationsModule 1.0 NotificationsModule.qml
+PrivacyModule 1.0 PrivacyModule.qml
+ResourcesModule 1.0 ResourcesModule.qml
+SidebarButtonModule 1.0 SidebarButtonModule.qml
+SysTrayMenuEntry 1.0 SysTrayMenuEntry.qml
+SysTrayMenu 1.0 SysTrayMenu.qml
+TrayModule 1.0 TrayModule.qml
+WeatherModule 1.0 WeatherModule.qml
+WorkspacesModule 1.0 WorkspacesModule.qml
