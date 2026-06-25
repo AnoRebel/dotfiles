@@ -1,0 +1,124 @@
+/*
+ * GTK Colors - Generated with iNiR theming
+ * This file is overwritten when you change wallpaper
+ */
+
+@define-color accent_color #B4C7ED;
+@define-color accent_fg_color #2E4060;
+@define-color accent_bg_color #B4C7ED;
+
+@define-color window_bg_color #0C0E12;
+@define-color window_fg_color #E3E5EF;
+
+@define-color headerbar_bg_color #0C0E12;
+@define-color headerbar_fg_color #E3E5EF;
+
+@define-color popover_bg_color #171A1F;
+@define-color popover_fg_color #E3E5EF;
+
+@define-color view_bg_color #0C0E12;
+@define-color view_fg_color #E3E5EF;
+
+@define-color card_bg_color #111318;
+@define-color card_fg_color #E3E5EF;
+
+@define-color sidebar_bg_color #0C0E12;
+@define-color sidebar_fg_color #E3E5EF;
+@define-color sidebar_border_color #0C0E12;
+@define-color sidebar_backdrop_color #0C0E12;
+
+headerbar {
+    background-color: #0C0E12 !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+
+headerbar separator {
+    background-color: transparent !important;
+}
+
+.nautilus-window .sidebar,
+.nautilus-window sidebar,
+placessidebar,
+placessidebar list {
+    background-color: #0C0E12 !important;
+    color: #E3E5EF !important;
+    border-right: none !important;
+}
+
+placessidebar row {
+    background-color: transparent !important;
+    color: #E3E5EF !important;
+}
+
+placessidebar row:hover {
+    background-color: #2A2F38 !important;
+}
+
+placessidebar row:selected,
+placessidebar row:selected:hover {
+    background-color: #383E4A !important;
+    color: #E3E5EF !important;
+}
+
+placessidebar image {
+    color: inherit !important;
+}
+
+.view {
+    background-color: #0C0E12 !important;
+}
+
+separator.sidebar {
+    background-color: transparent !important;
+    min-width: 0;
+}
+
+/* Context menus and popovers */
+popover,
+popover.background {
+    background-color: #171A1F !important;
+    color: #E3E5EF !important;
+}
+
+menu,
+.context-menu,
+.popup {
+    background-color: #171A1F !important;
+    color: #E3E5EF !important;
+}
+
+menuitem {
+    color: #E3E5EF !important;
+}
+
+menuitem:hover,
+menuitem:selected {
+    background-color: #2A2F38 !important;
+}
+
+menuitem:active,
+menuitem:selected:active {
+    background-color: #383E4A !important;
+    color: #E3E5EF !important;
+}
+
+button:hover {
+    background-color: #2A2F38 !important;
+}
+
+button:active {
+    background-color: #383E4A !important;
+    color: #E3E5EF !important;
+}
+
+entry:focus,
+textview:focus,
+spinbutton:focus {
+    border-color: alpha(#B4C7ED, 0.60) !important;
+    box-shadow: 0 0 0 1px alpha(#B4C7ED, 0.25) inset !important;
+}
+
+menu separator {
+    background-color: alpha(#E3E5EF, 0.12) !important;
+}
