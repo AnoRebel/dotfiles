@@ -1,0 +1,123 @@
+{
+    "output": {
+        "blocklist": [],
+        "equalizer#0": {
+            "balance": 0.0,
+            "bypass": false,
+            "input-gain": 0.0,
+            "left": {
+                "band0": {
+                    "frequency": 60.0,
+                    "gain": 5.96,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.7499999999999999,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band1": {
+                    "frequency": 198.3000363014611,
+                    "gain": 2.66,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.9,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band2": {
+                    "frequency": 289.0,
+                    "gain": -5.04,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 1.2000000000000002,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band3": {
+                    "frequency": 1900.0,
+                    "gain": 6.0,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.9500000000000001,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band4": {
+                    "frequency": 9953.0,
+                    "gain": 4.06,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.7199999999999999,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                }
+            },
+            "mode": "IIR",
+            "num-bands": 5,
+            "output-gain": 0.0,
+            "pitch-left": -3.469446951953614e-18,
+            "pitch-right": 0.0,
+            "right": {
+                "band0": {
+                    "frequency": 60.0,
+                    "gain": 5.96,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.7499999999999999,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band1": {
+                    "frequency": 198.3000363014611,
+                    "gain": 2.66,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.9,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band2": {
+                    "frequency": 289.0,
+                    "gain": -5.04,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 1.2000000000000002,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band3": {
+                    "frequency": 1900.0,
+                    "gain": 6.0,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.9500000000000001,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                },
+                "band4": {
+                    "frequency": 9953.0,
+                    "gain": 4.06,
+                    "mode": "RLC (BT)",
+                    "mute": false,
+                    "q": 0.7199999999999999,
+                    "slope": "x1",
+                    "solo": false,
+                    "type": "Bell"
+                }
+            },
+            "split-channels": false
+        },
+        "plugins_order": [
+            "equalizer#0"
+        ]
+    }
+}
