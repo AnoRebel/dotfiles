@@ -72,7 +72,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- Wayland magic (screen sharing etc.)
 	hl.exec_cmd("dbus-update-activation-environment --systemd --all") -- for XDPH
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- More wayland magic (screen sharing etc.)
-	hl.exec_cmd("/usr/lib/mate-polkit/polkit-mate-authentication-agent-1") -- used for user sudo graphical elevation
+	-- hl.exec_cmd("/usr/lib/mate-polkit/polkit-mate-authentication-agent-1") -- used for user sudo graphical elevation
+	hl.exec_cmd("systemctl --user start hyprpolkitagent") -- "/usr/lib/hyprpolkitagent/hyprpolkitagent" | used for user sudo graphical elevation
 	hl.exec_cmd("hyprctl setcursor Qogir 16")
 	hl.exec_cmd('gsettings set org.gnome.desktop.interface cursor-theme "Qogir"')
 	-- hl.exec_cmd("systemctl --user start hyprpolkitagent")
