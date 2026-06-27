@@ -410,6 +410,12 @@ if hl.plugin and hl.plugin.scrolloverview then
 			-- color        = SHADOW_BLACK,
 		},
 	})
+  -- hyprland.lua
+  -- hl.plugin.scrolloverview.gesture({ fingers = 3, action = "unset", direction = "up" })
+  hl.plugin.scrolloverview.gesture({ fingers = 3, action = "overview", direction = "vertical" })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", mod = "SUPER", scale = 1.5 })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", disable_inhibit = true })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 3, direction = "vertical", action = "unset" })
 end
 
 if hl.plugin and hl.plugin.hyprgrass then
@@ -438,16 +444,35 @@ if hl.plugin and hl.plugin.hyprgrass then
 		},
 	})
   hl.plugin.hyprgrass.bind {
-    pattern = {kind = "pinch", fingers = 3, direction = "pinchin"}
-    action = hl.dsp.window.float({ action = "set" })),
+    pattern = {kind = "pinch", fingers = 4, direction = "pinchin"},
+    action = hl.dsp.window.float({ action = "set" }),
   }
   hl.plugin.hyprgrass.bind {
-    pattern = {kind = "pinch", fingers = 3, direction = "pinchout"}
-    action = hl.dsp.window.fullscreen({ mode = "fullscreen", action = "set" })), -- mode: maximized | fullscreen and action: set | unset | toggle
+    pattern = {kind = "pinch", fingers = 4, direction = "pinchout"},
+    action = hl.dsp.window.float({ action = "unset" }),
   }
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 3, direction = "pinchin"},
+    action = hl.dsp.window.fullscreen({ mode="fullscreen", action = "set" }),
+  }
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 3, direction = "pinchout"},
+    action = hl.dsp.window.fullscreen({ mode = "maximized", action = "set" }), -- mode: maximized | fullscreen and action: set | unset | toggle
+  }
+  local function gesture_overview(action)
+    if action == nil then
+      action = "toggle"
+    end
+    if hl.plugin then
+      if hl.plugin.scrolloverview and hl.plugin.hyprgrass then
+        hl.plugin.scrolloverview.overview(action)
+      end
+    end
+  end
   hl.plugin.hyprgrass.gesture {
-    pattern = {kind = "swipe", fingers = 3, direction = "down"},
-    action = hl.plugin.scrolloverview.overview("on"),
+    pattern = {kind = "swipe", fingers = 3, direction = "vertical"},
+    -- action = function() gesture_overview("toggle") end,
+    action = hl.plugin.scrolloverview.overview("toggle"),
   }
 end
 
