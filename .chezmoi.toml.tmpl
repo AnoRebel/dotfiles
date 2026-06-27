@@ -8,11 +8,11 @@ encryption = "age"
     args = ["-f"]
 
 [diff]
-    # pager = "delta"
-    # pager = "hunky"
+    # pager = "delta -s"
+    pager = "hunk diff --watch"
     # pager = "diff-so-fancy"
-    command = "meld"
-    args = ["--diff", "%destination", "%target"]
+    # command = "meld"
+    # args = ["--diff", "%destination", "%target"]
 
 [merge]
     command = "avim"

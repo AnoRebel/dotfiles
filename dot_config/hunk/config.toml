@@ -1,0 +1,7 @@
+theme = "auto"
+watch = true
+exclude_untracked = false
+line_numbers = true
+wrap_lines = false
+agent_notes = false
+transparent_background = true

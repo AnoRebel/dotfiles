@@ -29,7 +29,7 @@ default_directory = '.'
 # Display file sizes using powers of 1000 (kB, MB, GB) instead of powers of 1024 (KiB, MiB, GiB).
 file_size_use_si = false
 # 
-# Default sort type (0: Name, 1: Size, 2: Date Modified, 3: Type).
+# Default sort type (0: Name, 1: Size, 2: Date Modified, 3: Type, 4: Natural).
 default_sort_type = 0
 # 
 # Default sort order (false: Ascending, true: Descending).
@@ -76,8 +76,12 @@ enable_file_preview_border = false
 # Whether to use the builtin syntax highlighting with chroma or use bat. Values: "" for builtin chroma, "bat" for bat
 code_previewer = ''
 # 
-# The length of the sidebar(excluding borders). If you don't want to display the sidebar, you can input 0 directly. If you want to display the value, please place it in the range of 5-20.
+# The length of the sidebar(excluding borders). If you don't find to display the sidebar, you can input 0 directly. If you want to display the value, please place it in the range of 5-20.
 sidebar_width = 20
+# 
+# Order of sidebar sections (valid values: "home", "pinned", "disks").
+# Only sections included in this list will be displayed.
+sidebar_sections = ['home', 'pinned', 'disks']
 # 
 # Border style
 border_top = '─'
