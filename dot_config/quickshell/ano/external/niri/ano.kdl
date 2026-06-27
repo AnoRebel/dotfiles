@@ -188,7 +188,12 @@ spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"
 spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
 // Authentication agent
-spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+//spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+//spawn-at-startup "/usr/bin/lxqt-policykit-agent"
+spawn-at-startup "systemctl --user start hyprpolkitagent" // "/usr/lib/hyprpolkitagent/hyprpolkitagent" | used for user sudo graphical elevation
+
+spawn-at-startup "/usr/lib/iio-sensor-proxy &"
+spawn-at-startup "iio-niri" "listen" "--monitor" "eDP-1"
 
 // System tray applet
 spawn-at-startup "nm-applet" "--indicator"

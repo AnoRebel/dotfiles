@@ -73,10 +73,12 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd --all") -- for XDPH
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- More wayland magic (screen sharing etc.)
 	-- hl.exec_cmd("/usr/lib/mate-polkit/polkit-mate-authentication-agent-1") -- used for user sudo graphical elevation
+	-- hl.exec_cmd("/usr/bin/lxqt-policykit-agent")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent") -- "/usr/lib/hyprpolkitagent/hyprpolkitagent" | used for user sudo graphical elevation
 	hl.exec_cmd("hyprctl setcursor Qogir 16")
 	hl.exec_cmd('gsettings set org.gnome.desktop.interface cursor-theme "Qogir"')
-	-- hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("/usr/lib/iio-sensor-proxy &")
+	hl.exec_cmd("iio-hyprland")
 	-- hl.exec_cmd("hypridle")
 	hl.exec_cmd("waybar") -- The top bar
 	hl.exec_cmd("~/.config/hypr/scripts/hyprsunset.sh")
@@ -336,11 +338,11 @@ if hl.plugin.dynamic_cursors then
 		plugin = {
 			dynamic_cursors = {
 				enabled = true,
-				mode    = "rotate", --"tilt"
+				mode = "rotate", --"tilt"
 
 				shake = {
 					enabled = true,
-					ipc     = true,
+					ipc = true,
 				},
 				hyprcursor = {
 					enabled = true,
@@ -354,12 +356,12 @@ if hl.plugin and hl.plugin.hyprexpo then
 	hl.config({
 		plugin = {
 			hyprexpo = {
-				columns          = 2,
-				gap_size         = 5,
-				bg_col           = BLACK_BG,
+				columns = 2,
+				gap_size = 5,
+				bg_col = BLACK_BG,
 				workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
 
-				enable_gesture   = true, -- laptop touchpad, 4 fingers
+				enable_gesture = true, -- laptop touchpad, 4 fingers
 				-- gesture_distance = 300, -- how far is the "max"
 				-- gesture_positive = true, -- positive = swipe down. Negative = swipe up.
 			},
@@ -371,22 +373,22 @@ if hl.plugin and hl.plugin.overview then
 	hl.config({
 		plugin = {
 			overview = {
-				gapsIn               = 3,
-				gapsOut              = 5,
-				onBottom             = false,
+				gapsIn = 3,
+				gapsOut = 5,
+				onBottom = false,
 				-- panelHeight       = 120,
-				panelBorderWidth     = 0,
-				workspaceMargin      = 20,
-				workspaceBorderSize  = 0,
-				centerAligned        = true,
-				disableGestures      = false,
-				showEmptyWorkspace   = true,
+				panelBorderWidth = 0,
+				workspaceMargin = 20,
+				workspaceBorderSize = 0,
+				centerAligned = true,
+				disableGestures = false,
+				showEmptyWorkspace = true,
 				hideBackgroundLayers = false,
 				-- hideTopLayers     = true,
 				-- hideOverlayLayers = true,
-				hideRealLayers          = true,
-				panelBorderColor        = ACCENT,
-				workspaceActiveBorder   = ACCENT,
+				hideRealLayers = true,
+				panelBorderColor = ACCENT,
+				workspaceActiveBorder = ACCENT,
 				workspaceInactiveBorder = INACTIVE,
 			},
 		},
@@ -394,20 +396,84 @@ if hl.plugin and hl.plugin.overview then
 end
 
 if hl.plugin and hl.plugin.scrolloverview then
-  hl.plugin.scrolloverview.configure({
-    gesture_distance = 300, -- how far is the "max" for the gesture
-    scale         = 0.6, -- preferred overview scale
-    workspace_gap = 80,
-    wallpaper     = 0,    -- 0: global only, 1: per-workspace only, 2: both
-    blur          = false, -- blur only the main overview wallpaper
+	hl.plugin.scrolloverview.configure({
+		gesture_distance = 300, -- how far is the "max" for the gesture
+		scale = 0.6, -- preferred overview scale
+		workspace_gap = 80,
+		wallpaper = 0, -- 0: global only, 1: per-workspace only, 2: both
+		blur = false, -- blur only the main overview wallpaper
 
-    shadow = {
-      enabled      = true,
-      range        = 50,
-      render_power = 3,
-      -- color        = SHADOW_BLACK,
-    },
+		shadow = {
+			enabled = true,
+			range = 50,
+			render_power = 3,
+			-- color        = SHADOW_BLACK,
+		},
 	})
+  -- hyprland.lua
+  -- hl.plugin.scrolloverview.gesture({ fingers = 3, action = "unset", direction = "up" })
+  hl.plugin.scrolloverview.gesture({ fingers = 3, action = "overview", direction = "vertical" })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", mod = "SUPER", scale = 1.5 })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", disable_inhibit = true })
+  -- hl.plugin.scrolloverview.gesture({ fingers = 3, direction = "vertical", action = "unset" })
+end
+
+if hl.plugin and hl.plugin.hyprgrass then
+	hl.config({
+		plugin = {
+			hyprgrass = {
+				-- The default sensitivity is probably too low on tablet screens,
+				-- I recommend turning it up to 4.0
+				sensitivity = 3.0,
+
+				-- in milliseconds
+				long_press_delay = 400,
+
+				-- resize windows by long-pressing on window borders and gaps.
+				-- If general:resize_on_border is enabled, general:extend_border_grab_area is
+				-- used for floating windows
+				resize_on_border_long_press = true,
+
+				-- in pixels, the distance from the edge that is considered an edge
+				edge_margin = 10,
+			},
+		},
+		gestures = {
+			workspace_swipe_touch = true,
+			workspace_swipe_cancel_ratio = 0.15,
+		},
+	})
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 4, direction = "pinchin"},
+    action = hl.dsp.window.float({ action = "set" }),
+  }
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 4, direction = "pinchout"},
+    action = hl.dsp.window.float({ action = "unset" }),
+  }
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 3, direction = "pinchin"},
+    action = hl.dsp.window.fullscreen({ mode="fullscreen", action = "set" }),
+  }
+  hl.plugin.hyprgrass.bind {
+    pattern = {kind = "pinch", fingers = 3, direction = "pinchout"},
+    action = hl.dsp.window.fullscreen({ mode = "maximized", action = "set" }), -- mode: maximized | fullscreen and action: set | unset | toggle
+  }
+  local function gesture_overview(action)
+    if action == nil then
+      action = "toggle"
+    end
+    if hl.plugin then
+      if hl.plugin.scrolloverview and hl.plugin.hyprgrass then
+        hl.plugin.scrolloverview.overview(action)
+      end
+    end
+  end
+  hl.plugin.hyprgrass.gesture {
+    pattern = {kind = "swipe", fingers = 3, direction = "vertical"},
+    -- action = function() gesture_overview("toggle") end,
+    action = hl.plugin.scrolloverview.overview("toggle"),
+  }
 end
 
 -------------------
@@ -567,10 +633,10 @@ hl.bind(mainMod .. "+mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- hl.bind(mainMod .. "+grave",    hl.dsp.global("hyprexpo:expo"))         -- can be: toggle, off/disable or on/enable
 -- hl.bind(mainMod .. "+grave",    hl.dsp.global("overview:toggle"))       -- can be: toggle, off/disable or on/enable
 -- hl.bind(mainMod .. "+grave",    hl.dsp.global("scrolloverview:overview")) -- can be: toggle, select, off/disable or on/enable
-hl.bind(mainMod .. "+grave",function()
-    if hl.plugin and hl.plugin.scrolloverview then
-        hl.plugin.scrolloverview.overview("toggle")
-    end
+hl.bind(mainMod .. "+grave", function()
+	if hl.plugin and hl.plugin.scrolloverview then
+		hl.plugin.scrolloverview.overview("toggle")
+	end
 end) -- can be: toggle, select, off/disable or on/enable
 
 -------------------------------
