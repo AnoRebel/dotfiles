@@ -1,0 +1,16 @@
+appimagelauncherd.service
+gcr-ssh-agent.socket
+git-maintenance@daily.timer
+git-maintenance@hourly.timer
+git-maintenance@weekly.timer
+gnome-keyring-daemon.socket
+p11-kit-server.socket
+pipewire-pulse.service
+pipewire-pulse.socket
+pipewire.service
+pipewire.socket
+podman.service
+podman.socket
+speech-dispatcher.socket
+wireplumber.service
+xdg-user-dirs.service

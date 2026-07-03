@@ -1,4 +1,10 @@
+{{- $migrate := promptBoolOnce . "migrate" "Run OS migration (restore packages/AUR/flatpaks/services from os-migration)" false -}}
+
 encryption = "age"
+
+[data]
+    migrate = {{ $migrate }}
+
 [age]
     identity = "~/.config/chezmoi/key.txt"
     recipient = "age1ytyarpug0hlclnygr22f6rzsakqfs6tyzndxrnrchzyzgq65a46qg2t8a7"

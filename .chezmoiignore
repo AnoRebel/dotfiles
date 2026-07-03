@@ -1,0 +1,7 @@
+# os-migration/ is tooling/data consumed by the run_onchange_ migration hook.
+# It must live in the source tree (so the hook can read it) but must NOT be
+# copied into the home directory as ~/os-migration.
+os-migration
+
+# Repo docs — not a dotfile.
+README.md

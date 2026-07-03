@@ -1,0 +1,7 @@
+# Transient restore progress marker — machine-local, not part of the manifest.
+.restore-state
+
+# Config archives are generated on demand; can be large and may hold secrets.
+# Regenerate with ./generate.sh --etc rather than committing them.
+etc-configs.tar.gz
+home-configs.tar.gz

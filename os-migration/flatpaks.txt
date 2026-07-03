@@ -1,0 +1,10 @@
+com.github.flxzt.rnote
+com.github.marhkb.Pods
+com.github.PintaProject.Pinta
+de.haeckerfelix.Shortwave
+io.freetubeapp.FreeTube
+io.github.dvlv.boxbuddyrs
+io.github.kolunmi.Bazaar
+it.mijorus.gearlever
+org.dbgate.DbGate
+page.kramo.Cartridges
