@@ -77,8 +77,10 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start hyprpolkitagent") -- "/usr/lib/hyprpolkitagent/hyprpolkitagent" | used for user sudo graphical elevation
 	hl.exec_cmd("hyprctl setcursor Qogir 16")
 	hl.exec_cmd('gsettings set org.gnome.desktop.interface cursor-theme "Qogir"')
-	hl.exec_cmd("/usr/lib/iio-sensor-proxy &")
-	hl.exec_cmd("iio-hyprland")
+	-- Screen auto-rotation: only start if the iio tools are installed, so this
+	-- config stays portable across machines that lack iio-sensor-proxy/iio-hyprland.
+	hl.exec_cmd("[ -x /usr/lib/iio-sensor-proxy ] && /usr/lib/iio-sensor-proxy &")
+	hl.exec_cmd("command -v iio-hyprland >/dev/null 2>&1 && iio-hyprland")
 	-- hl.exec_cmd("hypridle")
 	hl.exec_cmd("waybar") -- The top bar
 	hl.exec_cmd("~/.config/hypr/scripts/hyprsunset.sh")
@@ -410,12 +412,15 @@ if hl.plugin and hl.plugin.scrolloverview then
 			-- color        = SHADOW_BLACK,
 		},
 	})
-  -- hyprland.lua
-  -- hl.plugin.scrolloverview.gesture({ fingers = 3, action = "unset", direction = "up" })
-  hl.plugin.scrolloverview.gesture({ fingers = 3, action = "overview", direction = "vertical" })
-  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", mod = "SUPER", scale = 1.5 })
-  -- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", disable_inhibit = true })
-  -- hl.plugin.scrolloverview.gesture({ fingers = 3, direction = "vertical", action = "unset" })
+	-- Only register gestures if this plugin build exposes the `gesture` API
+	-- (older/newer scrolloverview builds may only provide `configure`).
+	if type(hl.plugin.scrolloverview.gesture) == "function" then
+		-- hl.plugin.scrolloverview.gesture({ fingers = 3, action = "unset", direction = "up" })
+		hl.plugin.scrolloverview.gesture({ fingers = 3, action = "overview", direction = "vertical" })
+		-- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", mod = "SUPER", scale = 1.5 })
+		-- hl.plugin.scrolloverview.gesture({ fingers = 4, direction = "vertical", disable_inhibit = true })
+		-- hl.plugin.scrolloverview.gesture({ fingers = 3, direction = "vertical", action = "unset" })
+	end
 end
 
 if hl.plugin and hl.plugin.hyprgrass then

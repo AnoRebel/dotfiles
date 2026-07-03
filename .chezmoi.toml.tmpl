@@ -1,9 +1,11 @@
-{{- $migrate := promptBoolOnce . "migrate" "Run OS migration (restore packages/AUR/flatpaks/services from os-migration)" false -}}
-
 encryption = "age"
 
 [data]
-    migrate = {{ $migrate }}
+    # OS migration is OFF by default so no interactive prompt is required at
+    # init and no "config template changed" nag appears. To rebuild a machine's
+    # packages/services on a fresh box, opt in explicitly:
+    #   chezmoi init --promptBool migrate=true && chezmoi apply
+    migrate = {{ promptBool "migrate" false }}
 
 [age]
     identity = "~/.config/chezmoi/key.txt"
