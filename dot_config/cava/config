@@ -222,22 +222,22 @@ fragment_shader = bar_spectrum.frag
 ; foreground = default
 
 # SDL and sdl_glsl only support hex code colors, these are the default:
-background = '#0C0619'
-foreground = '#e69dac'
+background = '#0D0D16'
+foreground = '#999abc'
 
 
 # Gradient mode, only hex defined colors are supported,
 # background must also be defined in hex or remain commented out. 1 = on, 0 = off.
 # You can define as many as 8 different colors. They range from bottom to top of screen
 gradient = 1
-gradient_color_1 = '#36494F'
-gradient_color_2 = '#2F5063'
-gradient_color_3 = '#4E484F'
-gradient_color_4 = '#654652'
-gradient_color_5 = '#932D4C'
-gradient_color_6 = '#e69dac'
-gradient_color_7 = '#a16d78'
-gradient_color_8 = '#712E45'
+gradient_color_1 = '#2E316E'
+gradient_color_2 = '#503963'
+gradient_color_3 = '#828B2E'
+gradient_color_4 = '#383B84'
+gradient_color_5 = '#3E4187'
+gradient_color_6 = '#999abc'
+gradient_color_7 = '#6b6b83'
+gradient_color_8 = '#1F2964'
 
 
 
